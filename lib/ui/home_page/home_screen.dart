@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
+import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -235,6 +236,7 @@ class _homescreenState extends State<homescreen> {
                             ),
                             onTap: () {
                               playsongs(data.uri);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(),));
                             },
                           ),
                         );

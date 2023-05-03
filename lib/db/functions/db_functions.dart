@@ -28,14 +28,14 @@ void addallsongsdb(SongModel data) async {
 }
 
 printdata() async {
-  final allsongdatabase = await Hive.openBox<songsmodel>("AllSongs");
+  final allsongdatabase = await Hive.openBox<songsmodel>(boxname);
   for (var elemetns in allsongdatabase.values) {
     print(elemetns.songName);
   }
 }
 
 AllsongsdatashowList() async {
-  final allsongdatabase = await Hive.openBox<songsmodel>("AllSongs");
+  final allsongdatabase = await Hive.openBox<songsmodel>(boxname);
   allSongListNotifier.value.clear();
   allSongListNotifier.value.addAll(allsongdatabase.values);
   allSongListNotifier.notifyListeners();
