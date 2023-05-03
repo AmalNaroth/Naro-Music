@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:naromusic/db/functions/db_functions.dart';
+import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/main_page/main_screen.dart';
 import 'package:naromusic/ui/username_page/userscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:naromusic/ui/controllers/player_controller.dart';
 
 class splashscreen extends StatefulWidget {
   const splashscreen({super.key});
@@ -19,7 +18,6 @@ class _splashscreenState extends State<splashscreen> {
     Timer(Duration(seconds: 3), () {
       checkpermission();
       //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => userscreen(),), (route) => false);
-      skipname();
       addname();
     // AllsongsdatashowList();
     });
@@ -29,11 +27,6 @@ class _splashscreenState extends State<splashscreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-  @override
   Widget build(BuildContext context) {
     
     return SafeArea(child:
@@ -41,21 +34,6 @@ class _splashscreenState extends State<splashscreen> {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-   Future<void>skipname()async{
-    final SharedPreferences check=await SharedPreferences.getInstance();
-    final checkvalue=check.getBool("Save_value");
-    if(checkvalue==true){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainscreen(),));
-    }else{
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => userscreen()));
-    }
-  }
   Future<void>addname()async{
     final SharedPreferences add=await SharedPreferences.getInstance();
     final addvalue=add.getString("Save_Name");
@@ -66,10 +44,6 @@ class _splashscreenState extends State<splashscreen> {
     }
   }
 }
-Future<void>skipchacker()async{
-    final Sharedpref= await SharedPreferences.getInstance();
-    Sharedpref.setBool("Save_value", true);
-  }
 
   Future<void>namechecker(String username)async{
     final Sharedprefs= await SharedPreferences.getInstance();

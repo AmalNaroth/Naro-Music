@@ -15,3 +15,13 @@ class songsmodel{
     int duration;
   songsmodel({required this.songName,required this.artistName,required this.uri,required this.id,required this.duration});
 }
+
+  String boxname='Songs';
+  class SongBox{
+    static  Box<songsmodel>?_box;
+
+  static Box<songsmodel> getInstance(){
+    return _box ??=Hive.box(boxname);
+  }
+    
+  }

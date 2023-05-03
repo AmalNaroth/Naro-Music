@@ -1,8 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:naromusic/ui/main_page/main_screen.dart';
 import 'package:naromusic/ui/splash_page/splash_screen.dart';
 import 'package:slide_to_act/slide_to_act.dart';
-
 
 class userscreen extends StatefulWidget {
   userscreen({super.key});
@@ -13,12 +14,10 @@ class userscreen extends StatefulWidget {
 
 class _userscreenState extends State<userscreen> {
   final _usernamecontroller=TextEditingController();
-
-  
+  String? imagepath;
 
   @override
   Widget build(BuildContext context) {
-    final splashobj=splashscreen();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -30,16 +29,35 @@ class _userscreenState extends State<userscreen> {
           SizedBox(
             height: 70,
           ),
-          // Text("ADD YOUR PHOTO"),
-          // CircleAvatar(
-          //   backgroundColor: Colors.black,
-          //   radius: 50,
-          //   child: CircleAvatar(
-          //     radius: 47,
-          //   backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          //  backgroundImage: AssetImage('assets/images/user_icon.png'),
-          //   ),
-          // ),
+          Text("ADD YOUR PHOTO"),
+          CircleAvatar(
+            backgroundColor: Colors.black,
+            radius: 50,
+            child: Stack(
+              children: [
+                CircleAvatar(
+                  radius: 47,
+                backgroundColor: Color.fromARGB(255, 255, 255, 255),
+           backgroundImage: imagepath==null ?AssetImage("assets/images/user_icon.png") as ImageProvider:
+           FileImage(File(imagepath!)),
+                ),
+                Positioned(
+                      bottom: 20,
+                      right: 20,
+                      child: InkWell(
+                        child: Icon(
+                          Icons.add_a_photo_sharp,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        onTap: () {
+                          takeimage();
+                        },
+                      )
+                )
+              ],
+            ),
+          ),
           SizedBox(height: 120,),
           Text("ENTER YOUR NAME",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           SizedBox(height: 10,),
@@ -68,12 +86,18 @@ class _userscreenState extends State<userscreen> {
             ),
           ),
           TextButton(onPressed: (){
-            skipchacker();
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => mainscreen(),));
           }, child: Text("Skip"))
         ],
       ),
     );
   }
- 
+  Future takeimage() async{
+    final PickedFile= await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(PickedFile!=null){
+      setState(() {
+        imagepath=PickedFile.path;
+      });
+    }
+  }
 }

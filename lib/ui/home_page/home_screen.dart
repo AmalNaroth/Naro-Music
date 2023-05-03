@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
@@ -12,9 +13,11 @@ class homescreen extends StatefulWidget {
   @override
   State<homescreen> createState() => _homescreenState();
 }
-
-
+  final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
+    
 class _homescreenState extends State<homescreen> {
+  
+
   @override
   Widget build(BuildContext context) {
     AllsongsdatashowList();

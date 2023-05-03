@@ -1,10 +1,4 @@
-import 'dart:io';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:naromusic/db/functions/db_functions.dart';
-import 'package:naromusic/db/models/songsmodel.dart';
-import 'package:on_audio_query/on_audio_query.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 // class Playercontroller extends GetxController{
 //   final audioquery = OnAudioQuery();
@@ -47,6 +41,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 //   }
 // }
+
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:naromusic/db/functions/db_functions.dart';
+import 'package:naromusic/db/models/songsmodel.dart';
+import 'package:on_audio_query/on_audio_query.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 final audioquery = OnAudioQuery();
 final audioplyer= AssetsAudioPlayer();

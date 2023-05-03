@@ -31,7 +31,6 @@ class _mainscreenState extends State<mainscreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
           child: GNav(
-            
             gap: 8,
             backgroundColor: Colors.black,
             color: Color.fromARGB(255, 158, 155, 155),
