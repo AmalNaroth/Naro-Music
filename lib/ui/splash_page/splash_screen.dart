@@ -49,3 +49,5 @@ class _splashscreenState extends State<splashscreen> {
     final Sharedprefs= await SharedPreferences.getInstance();
     Sharedprefs.setString("Save_Name", username);
   }
+
+  

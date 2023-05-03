@@ -42,9 +42,11 @@
 //   }
 // }
 
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
+import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -72,9 +74,22 @@ checkpermission() async{
   }else{
     checkpermission();
   }
-}
+}      
 
-playsongs(Uri){
-  audioplyer.open(Audio.file(Uri));
-  audioplyer.play();
+
+
+
+
+
+  List <Audio> audio=[];
+  
+playsongs(index,List songlist){
+  audio.clear();
+  for(var elements in songlist){
+    audio.add(Audio.file(elements.uri,metas: Metas(id: elements.id.toString(),
+    artist: elements.artistName,
+    title: elements.songName
+    )));
+  }
+  audioPlayer.open(Playlist(audios: audio,startIndex: index),autoStart: false,showNotification: true);
 }

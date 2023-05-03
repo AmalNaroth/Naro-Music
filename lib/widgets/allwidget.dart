@@ -1,4 +1,6 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:naromusic/ui/home_page/home_screen.dart';
 
 Widget playbox(String text,int curretidx,int value){
   return Container(
@@ -20,7 +22,8 @@ Widget playbox(String text,int curretidx,int value){
 }
 
 Widget nowplaying(BuildContext context){
-  return Container(
+  return audioPlayer.builderCurrent(builder: (context, playing) {
+    return Container(
       decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/bgimage2.jpg"))
       ),
@@ -74,9 +77,9 @@ Widget nowplaying(BuildContext context){
                           children: [
                             Column(
                               children: [
-                                Text("fjsfikfnikfn"),
+                                Text(playing.audio.audio.metas.title!),
                                 SizedBox(height: 10,),
-                                Text("fjsfikfnikfn")
+                                Text(playing.audio.audio.metas.artist!)
                               ],
                             ),
                             Icon(Icons.favorite,color: Colors.red,size: 25,),
@@ -109,10 +112,18 @@ Widget nowplaying(BuildContext context){
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          IconButton(onPressed: (){}, icon: Icon(Icons.shuffle)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_new_outlined)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.play_arrow)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_outlined)),
+                          IconButton(onPressed: (){
+                          }, icon: Icon(Icons.shuffle)),
+
+                          IconButton(onPressed: (){
+                            audioPlayer.previous();
+                          }, icon: Icon(Icons.arrow_back_ios_new_outlined)),
+                          IconButton(onPressed: (){
+                            audioPlayer.playOrPause();
+                          }, icon: Icon(Icons.play_arrow)),
+                          IconButton(onPressed: (){
+                            audioPlayer.next();
+                          }, icon: Icon(Icons.arrow_forward_ios_outlined)),
                           IconButton(onPressed: (){}, icon: Icon(Icons.play_arrow))
                       ],)
                     ],
@@ -124,4 +135,5 @@ Widget nowplaying(BuildContext context){
         ),
       ),
     );
+  },);
 }

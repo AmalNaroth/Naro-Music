@@ -40,3 +40,31 @@ AllsongsdatashowList() async {
   allSongListNotifier.value.addAll(allsongdatabase.values);
   allSongListNotifier.notifyListeners();
 }
+
+
+addtofavroutiedbfunction(songsmodel data)async{
+  final favrioutedatabase= await Hive.openBox<songsmodel>("favlistDB");
+  bool check =false;
+  for(var elements in favrioutedatabase.values){
+    if(data.id==elements.id){
+      check=true;
+    }
+  }
+  if(check==false){
+    favrioutedatabase.add(data);
+  }
+  allsongsfavlistshow();
+}
+
+allsongsfavlistshow() async{
+  final favrioutedatabase= await Hive.openBox<songsmodel>("favlistDB");
+  favsongListNotifier.value.clear();
+  favsongListNotifier.value.addAll(favrioutedatabase.values);
+  favsongListNotifier.notifyListeners();
+}
+
+favsongslistdelete(int index) async{
+  final favrioutedatabase= await Hive.openBox<songsmodel>("favlistDB");
+  favrioutedatabase.deleteAt(index);
+  allsongsfavlistshow();
+}

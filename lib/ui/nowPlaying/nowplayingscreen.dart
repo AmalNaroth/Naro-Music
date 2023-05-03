@@ -12,6 +12,8 @@ class nowplayingscreen extends StatefulWidget {
 class _nowplayingscreenState extends State<nowplayingscreen> {
   @override
   Widget build(BuildContext context) {
-    return nowplaying(context);
+    return Scaffold(
+      body: nowplaying(context)
+    );
   }
 }

@@ -7,6 +7,7 @@ import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
@@ -17,10 +18,19 @@ class homescreen extends StatefulWidget {
   final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
     
 class _homescreenState extends State<homescreen> {
-  
+
+  String? savedName; 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    username();
+  }
 
   @override
   Widget build(BuildContext context) {
+
     AllsongsdatashowList();
     DateTime now = DateTime.now();
     dynamic currenttime = DateFormat('kk').format(now);
@@ -44,164 +54,63 @@ class _homescreenState extends State<homescreen> {
       "Most Played",
     ];
     
-
-    return Scaffold(
-        //backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text(timename),
-          actions: [
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      printdata();
-                    }, icon: Icon(Icons.notification_add)),
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/dq.jpg"),
-                ),
-              ],
-            )
-          ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey,
+            Colors.black
+          ]
         ),
-        body:
-           Column(
-             children: [
-               Container(
-                color: Colors.white,
-                 child: SingleChildScrollView(
-                     scrollDirection: Axis.horizontal,
-                     child: Row(
-                       children: <Widget>[
-                         Card(
-                           child: Stack(
-                             children: [
-                  Container(
-                  margin: EdgeInsets.only(top: 30,left: 20),
-                      height: 230,
-                      width: 230,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage("assets/images/category1.jpg")),
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                             ),
-                             Container(
-                  margin: EdgeInsets.only(top:230,left: 65),
-                  height: 50,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(50)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                         Text("Favourites"),
-                      Text("0 Songs")
-                      ],
-                     ),
-                     SizedBox(width: 10,),
-                     CircleAvatar()
-                    ],
-                  )
-                             )
-                             ],
-                           ),
-                         ),
-                         Card(
-                           child: Stack(
-                             children: [
-                  Container(
-                  margin: EdgeInsets.only(top: 30,left: 20),
-                      height: 230,
-                      width: 230,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage("assets/images/category3.jpg")),
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                             ),
-                             Container(
-                  margin: EdgeInsets.only(top:230,left: 50),
-                  height: 50,
-                  width: 170,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(55)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                         Text("Recently Played",),
-                      Text("0 Songs")
-                      ],
-                     ),
-                     SizedBox(width: 10,),
-                     CircleAvatar()
-                    ],
-                  )
-                             )
-                             ],
-                           ),
-                         ),
-               
-                         Card(
-                           child: Stack(
-                             children: [
-                  Container(
-                  margin: EdgeInsets.only(top: 30,left: 20,right: 10),
-                      height: 230,
-                      width: 230,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage("assets/images/category1.jpg")),
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                             ),
-                             Container(
-                  margin: EdgeInsets.only(top:230,left: 65),
-                  height: 50,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(50)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                         Text( "Most Played"),
-                      Text("0 Songs")
-                      ],
-                     ),
-                     SizedBox(width: 10,),
-                     CircleAvatar()
-                    ],
-                  )
-                             )
-                             ],
-                           ),
-                         ),
-                       ],
-                     ),
-                         ),
-               ),
-               SizedBox(
-                          height: 5,
-                         ),
+        
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(child: 
+        Padding(
+          padding: const EdgeInsets.only(top: 20,left: 22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(onPressed: (){}, icon: Icon(Icons.sort_rounded)),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))
+                  ],
+                ),
+              ),
+              SizedBox(height: 30,),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
 
-               Expanded(
+
+                child:savedName==null ? Text('Hello Sir') :Text((savedName!),
+
+
+                style: TextStyle(fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1
+                ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text("What do yo want to here sir?",
+                style: TextStyle(fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+                ),
+                ),
+              ),
+              Expanded(
                  child: Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 10),
+                   padding: const EdgeInsets.only(right: 15),
                    child: ValueListenableBuilder(
                      valueListenable:  allSongListNotifier,
                      builder: (BuildContext ctx, List<songsmodel>newlist, Widget? child) {
@@ -221,7 +130,7 @@ class _homescreenState extends State<homescreen> {
                    
                             title: Text(data.songName,overflow: TextOverflow.ellipsis,),
                             subtitle: Text(data.artistName,overflow: TextOverflow.ellipsis,),
-                            tileColor: Colors.grey.shade300,
+                            tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -230,12 +139,13 @@ class _homescreenState extends State<homescreen> {
                                 }, icon: Icon(Icons.list)),
                                 IconButton(
                                     onPressed: () {
+                                      addtofavroutiedbfunction(data);
                                     },
                                     icon: Icon(Icons.favorite_outline_outlined))
                               ],
                             ),
                             onTap: () {
-                              playsongs(data.uri);
+                              playsongs(index, allSongListNotifier.value);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(),));
                             },
                           ),
@@ -244,81 +154,20 @@ class _homescreenState extends State<homescreen> {
                              );
                      },
                    ),
-                   
-                   
-                   
-                   
-                   
-                   
-                   
+
                  ),
                ),
-              
-
-              //  Expanded(
-              //    child: FutureBuilder<List<SongModel>>(
-              //            future: controller.audioquery.querySongs(
-              //     ignoreCase: true,
-              //     orderType: OrderType.ASC_OR_SMALLER,
-              //     sortType: null,
-              //     uriType: UriType.EXTERNAL
-              //            ),
-              //            builder: (BuildContext context, snapshot) {
-              //     if(snapshot.data==null){
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     }else if(snapshot.data!.isEmpty){
-              //       return Center(
-              //         child: Text("No song found"),
-              //       );
-              //     }else{
-              //       print(snapshot.data);
-              //       return Padding(
-              //            padding: const EdgeInsets.all(8.0),
-              //            child: ListView.builder(
-              //     physics: BouncingScrollPhysics(),
-              //     itemCount: snapshot.data!.length,
-              //     itemBuilder: (context, index) {
-              //       return Container(
-              //         margin: EdgeInsets.only(bottom: 5),
-              //         child: ListTile(
-              //           shape: RoundedRectangleBorder(
-              //             borderRadius: BorderRadius.circular(12),
-              //           ),
-              //           leading: QueryArtworkWidget(id: snapshot.data![index].id, type:ArtworkType.AUDIO,
-              //           nullArtworkWidget: Icon(Icons.music_note_rounded),
-              //           ),
-               
-              //           title: Text(snapshot.data![index].displayNameWOExt,overflow: TextOverflow.ellipsis,),
-              //           subtitle: Text("${snapshot.data![index].artist}",overflow: TextOverflow.ellipsis,),
-              //           tileColor: Colors.grey.shade300,
-              //           trailing: Row(
-              //             mainAxisSize: MainAxisSize.min,
-              //             children: [
-              //               IconButton(onPressed: () {
-                              
-              //               }, icon: Icon(Icons.list)),
-              //               IconButton(
-              //                   onPressed: () {
-              //                   },
-              //                   icon: Icon(Icons.favorite_outline_outlined))
-              //             ],
-              //           ),
-              //           onTap: () {
-              //             controller.playsong(snapshot.data![index].uri.toString());
-              //           },
-              //         ),
-              //       );
-              //     },
-              //            ),
-              //          );
-              //     }
-              //          },),
-              //  ),
-             ],
-           )
-        
-        );
+            ],
+          ),
+        )
+        ),
+      ),
+    );
   }
+  Future<void> username()async{
+    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+    setState(() {
+      savedName=sharedPrefs.getString('Save_Name');
+    });
+}
 }

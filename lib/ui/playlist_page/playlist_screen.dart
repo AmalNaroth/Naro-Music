@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:naromusic/ui/playlist_page/favroutiteList.dart';
 
 class playlist_screen extends StatefulWidget {
   const playlist_screen({super.key});
@@ -26,7 +27,6 @@ class _playlist_screenState extends State<playlist_screen> {
       ),
       body: Column(
         children: [
-         
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(5.0),
@@ -44,6 +44,9 @@ class _playlist_screenState extends State<playlist_screen> {
                       leading: CircleAvatar(),
                       title: Text("Liked Songs🖤"),
                       subtitle: Text("PlayList.songs $index"),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => favlistscreen(),));
+                      },
                     ):ListTile(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
