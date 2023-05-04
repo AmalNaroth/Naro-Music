@@ -68,39 +68,114 @@ class _settings_screenState extends State<settings_screen> {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: CircleAvatar(
-              child: Icon(SettingsIcon[index]),
-              backgroundColor: Colors.black,
-            ),
-            title: Text(SettingsName[index]),
-            trailing: index == 2
-                ? IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded))
-                : Text(""),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context1) {
-                  return AlertDialog(
-                    title: Text("About"),
-                    content: Text("Do you want to"),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context1).pop();
-                          }, child: Text("Close"))
-                    ],
-                  );
-                },
-              );
-            },
-          );
-        },
+      // body: ListView.builder(
+      //   itemCount: 5,
+      //   itemBuilder: (context, index) {
+      //     return ListTile(
+      //       leading: CircleAvatar(
+      //         child: Icon(SettingsIcon[index]),
+      //         backgroundColor: Colors.black,
+      //       ),
+      //       title: Text(SettingsName[index]),
+      //       trailing: index == 2
+      //           ? IconButton(
+      //               onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded))
+      //           : Text(""),
+      //       onTap: () {
+      //         showDialog(
+      //           context: context,
+      //           builder: (context1) {
+      //             return AlertDialog(
+      //               title: Text("About"),
+      //               content: Text("Do you want to"),
+      //               actions: [
+      //                 TextButton(
+      //                     onPressed: () {
+      //                       Navigator.of(context1).pop();
+      //                     }, child: Text("Close"))
+      //               ],
+      //             );
+      //           },
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
+      body:Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey,
+            Colors.black
+          ]
+        ),
+        
       ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(50),
+                 ),
+              color: Color.fromARGB(255, 190, 157, 55),
+              child: ListTile(
+                leading: CircleAvatar(),
+                title: Text("About"),
+              ),
+            ),
+            Card(
+              child: Container(
+              height: 100,
+              width: 200,
+                color: Color.fromARGB(255, 144, 144, 144),
+                child: ListTile(
+                  leading: CircleAvatar(),
+                  title: Text("Share"),
+                ),
+              ),
+            ),
+            Card(
+              child: Container(
+              height: 100,
+              width: 200,
+                color: Color.fromARGB(255, 144, 144, 144),
+                child: ListTile(
+                  leading: CircleAvatar(),
+                  title: Text("Notification"),
+                ),
+              ),
+            ),
+            Card(
+              child: Container(
+              height: 100,
+              width: 200,
+                color: Color.fromARGB(255, 144, 144, 144),
+                child: ListTile(
+                  leading: CircleAvatar(),
+                  title: Text("Terms And Conditions"),
+                ),
+              ),
+            ),
+            Card(
+              child: Container(
+              height: 100,
+              width: 200,
+                color: Color.fromARGB(255, 144, 144, 144),
+                child: ListTile(
+                  leading: CircleAvatar(),
+                  title: Text("Privacy & Policy"),
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
+      )
     )
       );
   }

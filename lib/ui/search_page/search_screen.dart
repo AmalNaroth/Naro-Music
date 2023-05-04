@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -93,7 +92,6 @@ class _search_screenState extends State<search_screen> {
                             leading: QueryArtworkWidget(id: data.id, type:ArtworkType.AUDIO,
                             nullArtworkWidget: Icon(Icons.music_note_rounded),
                             ),
-                   
                             title: Text(data.songName,overflow: TextOverflow.ellipsis,),
                             subtitle: Text(data.artistName,overflow: TextOverflow.ellipsis,),
                             tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
@@ -111,14 +109,13 @@ class _search_screenState extends State<search_screen> {
                               ],
                             ),
                             onTap: () {
-                              playsongs(index, allSongListNotifier.value);
+                              playsongs(index, songsdisplaylist);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                             },
                           ),
                         );
                       },
                              )
-
                  ):const Center(
                         child: Text(
                           'No match found',

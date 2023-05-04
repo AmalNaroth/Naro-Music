@@ -5,3 +5,4 @@ ValueNotifier<List<songsmodel>>allSongListNotifier= ValueNotifier([]);
 
 ValueNotifier<List<songsmodel>>favsongListNotifier= ValueNotifier([]);
 
+ValueNotifier<List<songsmodel>>recentlyPlayedNotifier= ValueNotifier([]);

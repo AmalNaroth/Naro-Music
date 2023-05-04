@@ -1,11 +1,9 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
-import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
-import 'package:naromusic/widgets/allwidget.dart';
+import 'package:naromusic/ui/ui_functions/ui_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class nowplayingscreen extends StatefulWidget {
@@ -24,6 +22,8 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: audioPlayer.builderCurrent(builder: (context, playing) {
+        int songid=int.parse(playing.audio.audio.metas.id!);
+        findsong(songid);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/bgimage2.jpg"))

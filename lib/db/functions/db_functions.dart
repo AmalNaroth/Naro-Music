@@ -1,5 +1,4 @@
 
-
 import 'package:hive_flutter/adapters.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -69,3 +68,31 @@ favsongslistdelete(int index) async{
   allsongsfavlistshow();
 }
 
+
+Future<void> addrecentlyplayed(songsmodel data) async{
+  final recentlyplayeddatabae= await Hive.openBox<songsmodel>("recentlyplayeddb");
+  int count=0;
+  for(var elements in recentlyplayeddatabae.values){
+    count++;
+  }
+  if(count>4){
+    recentlyplayeddatabae.deleteAt(0);
+  }
+  int index=0;
+  for(var element in recentlyplayeddatabae.values){
+    if(element.id==data.id){
+      recentlyplayeddatabae.deleteAt(index);
+    }
+    index++;
+  }
+  recentlyplayeddatabae.add(data);
+  allrecentlyplaylistshow();
+}
+
+allrecentlyplaylistshow()async{
+  final recentlyplayeddatabae=await Hive.openBox<songsmodel>("recentlyplayeddb");
+  recentlyPlayedNotifier.value.clear();
+  recentlyPlayedNotifier.value.addAll(recentlyplayeddatabae.values);
+  recentlyPlayedNotifier.value=List<songsmodel>.from(recentlyPlayedNotifier.value.reversed);
+  recentlyPlayedNotifier.notifyListeners();
+}

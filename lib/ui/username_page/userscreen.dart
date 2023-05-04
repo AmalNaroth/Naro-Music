@@ -1,6 +1,5 @@
-import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:naromusic/ui/main_page/main_screen.dart';
 import 'package:naromusic/ui/splash_page/splash_screen.dart';
 import 'package:slide_to_act/slide_to_act.dart';
