@@ -58,7 +58,7 @@ class _favlistscreenState extends State<favlistscreen> {
                  ),
                  onTap: () {
                    playsongs(index, allSongListNotifier.value);
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(),));
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                  },
                ),
              );

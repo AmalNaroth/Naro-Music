@@ -89,7 +89,13 @@ class _homescreenState extends State<homescreen> {
                 padding: const EdgeInsets.only(bottom: 5),
 
 
-                child:savedName==null ? Text('Hello Sir') :Text((savedName!),
+                child:savedName==null ? Text('Hello Sir',
+                style: TextStyle(fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1
+                ),
+                ) :Text((savedName!),
 
 
                 style: TextStyle(fontSize: 28,
@@ -146,7 +152,7 @@ class _homescreenState extends State<homescreen> {
                             ),
                             onTap: () {
                               playsongs(index, allSongListNotifier.value);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                             },
                           ),
                         );

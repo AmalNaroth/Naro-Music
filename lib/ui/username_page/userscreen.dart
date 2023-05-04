@@ -18,86 +18,69 @@ class _userscreenState extends State<userscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey,
+            Colors.black
+          ]
+        ),
+        
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         title: Text("Naro Music"),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 70,
-          ),
-          Text("ADD YOUR PHOTO"),
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: 50,
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 47,
-                backgroundColor: Color.fromARGB(255, 255, 255, 255),
-           backgroundImage: imagepath==null ?AssetImage("assets/images/user_icon.png") as ImageProvider:
-           FileImage(File(imagepath!)),
-                ),
-                Positioned(
-                      bottom: 20,
-                      right: 20,
-                      child: InkWell(
-                        child: Icon(
-                          Icons.add_a_photo_sharp,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        onTap: () {
-                          takeimage();
-                        },
-                      )
-                )
-              ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 80,
             ),
-          ),
-          SizedBox(height: 120,),
-          Text("ENTER YOUR NAME",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          SizedBox(height: 10,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextFormField(
-              controller: _usernamecontroller,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50)
+            SizedBox(height: 120,),
+            Text("ENTER YOUR NAME",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextFormField(
+                controller: _usernamecontroller,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50)
+                  ),
+                  labelText: "User name",
                 ),
-                labelText: "User name"
               ),
             ),
-          ),
-          SizedBox(height: 10,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 90.0),
-            child: SlideAction(
-              outerColor: Colors.black,
-              onSubmit: () {
-                namechecker(_usernamecontroller.text);
-                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => mainscreen(),), (route) => false);
-              },
-              text: "Start",
+            SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 90.0),
+              child: SlideAction(
+                outerColor: Colors.black,
+                onSubmit: () {
+                  namechecker(_usernamecontroller.text);
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => mainscreen(),), (route) => false);
+                },
+                text: "Start",
+              ),
             ),
-          ),
-          TextButton(onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => mainscreen(),));
-          }, child: Text("Skip"))
-        ],
+            SizedBox(height: 10,),
+            TextButton(onPressed: (){
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => mainscreen(),));
+            }, child: Text("Skip",style: TextStyle(
+              color: Colors.white,
+              fontSize: 18
+            ),))
+          ],
+        ),
       ),
+    )
     );
-  }
-  Future takeimage() async{
-    final PickedFile= await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(PickedFile!=null){
-      setState(() {
-        imagepath=PickedFile.path;
-      });
-    }
   }
 }

@@ -68,3 +68,4 @@ favsongslistdelete(int index) async{
   favrioutedatabase.deleteAt(index);
   allsongsfavlistshow();
 }
+

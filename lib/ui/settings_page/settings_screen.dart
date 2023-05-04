@@ -38,7 +38,18 @@ List<String> SettingsText=[
 class _settings_screenState extends State<settings_screen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.grey,
+            Colors.black
+          ]
+        ),
+      ),
+      child:  Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
         backgroundColor: Colors.black,
@@ -90,6 +101,7 @@ class _settings_screenState extends State<settings_screen> {
           );
         },
       ),
-    );
+    )
+      );
   }
 }
