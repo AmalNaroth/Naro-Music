@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:naromusic/ui/playlist_page/favroutiteList.dart';
+import 'package:naromusic/ui/playlist_page/mostplayedlist.dart';
 import 'package:naromusic/ui/playlist_page/recentlyList.dart';
 
 class playlist_screen extends StatefulWidget {
@@ -63,46 +66,14 @@ class _playlist_screenState extends State<playlist_screen> {
                          Center(child: SizedBox(
                           height: 50,
                           width: 100,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)
-                            ),
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            child: Center(child: Text('Favorites', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
-                          ),
-                        )),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage("assets/images/category3.jpg"),
-                      fit: BoxFit.cover
-                      ),
-                      //color: Colors.purple[600],
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    margin: EdgeInsets.only(right: 10),
-                    width: 220,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                         Center(child: SizedBox(
-                          height: 50,
-                          width: 100,
                           child: InkWell(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => recentlylistscreen(),)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => favlistscreen(),)),
                             child: Card(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)
                               ),
                               color: Color.fromARGB(255, 0, 0, 0),
-                              child: Center(child: Text('Recently Played', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
+                              child: Center(child: Text('Favorites', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
                             ),
                           ),
                         )),
@@ -110,6 +81,37 @@ class _playlist_screenState extends State<playlist_screen> {
                     ),
                   ),
                 ),
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage("assets/images/category3.jpg"),
+                    fit: BoxFit.cover
+                    ),
+                    //color: Colors.purple[600],
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                  margin: EdgeInsets.only(right: 10),
+                  width: 220,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                       Center(child: SizedBox(
+                        height: 50,
+                        width: 100,
+                        child: InkWell(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => recentlylistscreen(),)),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)
+                            ),
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            child: Center(child: Text('Recently Played', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
+                          ),
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
+
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(image: AssetImage("assets/images/category1.jpg"),
@@ -126,12 +128,15 @@ class _playlist_screenState extends State<playlist_screen> {
                        Center(child: SizedBox(
                         height: 50,
                         width: 100,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)
+                        child: InkWell(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => mostplayedlistScreen(),)),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)
+                            ),
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            child: Center(child: Text('Most Played', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
                           ),
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          child: Center(child: Text('Most Played', style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),),textAlign: TextAlign.center,)),
                         ),
                       )),
                     ],

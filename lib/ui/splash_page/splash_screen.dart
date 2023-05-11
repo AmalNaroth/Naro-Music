@@ -13,6 +13,23 @@ class splashscreen extends StatefulWidget {
 }
 
 class _splashscreenState extends State<splashscreen> {
+  //value getting to sharedPreferences
+  Future<void>addname()async{
+    final SharedPreferences add=await SharedPreferences.getInstance();
+    final addvalue=add.getString("Save_Name");
+    if(addvalue!=null){
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainscreen(),));
+    }else{
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => userscreen(onAddUserName: namechecker,)));
+    }
+  }
+
+  //value adding to share preference
+  Future<void>namechecker(String username)async{
+    final Sharedprefs= await SharedPreferences.getInstance();
+    Sharedprefs.setString("Save_Name", username);
+  }
+
   @override
   void initState(){
     Timer(Duration(seconds: 3), () {
@@ -21,33 +38,17 @@ class _splashscreenState extends State<splashscreen> {
       addname();
     // AllsongsdatashowList();
     });
-    
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(child:
     Center(child: Image.asset('assets/images/Naro logo.png',height: 200,))
     );
   }
 
-  Future<void>addname()async{
-    final SharedPreferences add=await SharedPreferences.getInstance();
-    final addvalue=add.getString("Save_Name");
-    if(addvalue!=null){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainscreen(),));
-    }else{
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => userscreen()));
-    }
-  }
+  
 }
-
-  Future<void>namechecker(String username)async{
-    final Sharedprefs= await SharedPreferences.getInstance();
-    Sharedprefs.setString("Save_Name", username);
-  }
 
   

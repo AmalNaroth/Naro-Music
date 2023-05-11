@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:naromusic/ui/main_page/main_screen.dart';
-import 'package:naromusic/ui/splash_page/splash_screen.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class userscreen extends StatefulWidget {
-  userscreen({super.key});
+  userscreen({super.key, required this.onAddUserName});
+    final void Function(String username) onAddUserName;
 
   @override
   State<userscreen> createState() => _userscreenState();
@@ -27,9 +27,9 @@ class _userscreenState extends State<userscreen> {
             Colors.black
           ]
         ),
-        
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false, 
         backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -63,7 +63,7 @@ class _userscreenState extends State<userscreen> {
               child: SlideAction(
                 outerColor: Colors.black,
                 onSubmit: () {
-                  namechecker(_usernamecontroller.text);
+                  widget.onAddUserName(_usernamecontroller.text);
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => mainscreen(),), (route) => false);
                 },
                 text: "Start",

@@ -17,13 +17,16 @@ class _search_screenState extends State<search_screen> {
 
 
   // List<songsmodel>songssearchlist=Hive.box<songsmodel>(boxname).values.toList();
+
    late List<songsmodel>songsdisplaylist=List<songsmodel>.from(allSongListNotifier.value);
+
   final _searchController=TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, 
       appBar: AppBar(
         title: Text("Search"),
         backgroundColor: Colors.black,
@@ -103,7 +106,7 @@ class _search_screenState extends State<search_screen> {
                                 }, icon: Icon(Icons.list)),
                                 IconButton(
                                     onPressed: () {
-                                      addtofavroutiedbfunction(data);
+                                      addtofavroutiedbfunction(data,context);
                                     },
                                     icon: Icon(Icons.favorite_outline_outlined))
                               ],
@@ -130,12 +133,21 @@ class _search_screenState extends State<search_screen> {
               );
   }
   void songsearch(String value){
+    songsdisplaylist.clear;
     setState(() {
+
     songsdisplaylist =allSongListNotifier.value
           .where((element) =>
               element.songName.toLowerCase().startsWith(value.toLowerCase()))
           .toList();
+
+    // for(var elements in allSongListNotifier.value){
+    //   if(elements.songName.toLowerCase().startsWith(value.toLowerCase())){
+    //     songsdisplaylist.add(elements);
+    //   }
+    // }
     }
+    
     );
   }
   void cleartext(){

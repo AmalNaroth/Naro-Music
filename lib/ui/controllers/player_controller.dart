@@ -1,48 +1,3 @@
-
-
-// class Playercontroller extends GetxController{
-//   final audioquery = OnAudioQuery();
-//   final audioplyer = AudioPlayer();
-
-//   @override
-//   void onInit() {
-//     // TODO: implement onInit
-//     super.onInit();
-//     checkpermission();
-//   }
-
-//   checkpermission()async{
-//     final permission = await Permission.storage.request();
-//     if(permission.isGranted){
-     
-      
-//       return OnAudioQuery().querySongs(
-//         ignoreCase: true,
-//           orderType: OrderType.ASC_OR_SMALLER,
-//           sortType: null,
-//           uriType: UriType.EXTERNAL,
-//       );
-//     }else{
-//       checkpermission();
-
-//     }
-//   }
-
-
-//   playsong(String uri){
-//     try {
-//       audioplyer.setAudioSource(
-//         AudioSource.uri(Uri.parse(uri))
-//       );
-//       audioplyer.play();
-//     } on Exception catch (e) {
-      
-//     }
-
-//   }
-// }
-
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -75,11 +30,6 @@ checkpermission() async{
     checkpermission();
   }
 }      
-
-
-
-
-
 
   List <Audio> audio=[];
   

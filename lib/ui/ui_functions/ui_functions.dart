@@ -5,6 +5,7 @@ void findsong(int id){
   for(var element in allSongListNotifier.value){
     if(element.id==id){
      addrecentlyplayed(element);
+     mostPlayedSongs(element);
      break;
     }
   }
