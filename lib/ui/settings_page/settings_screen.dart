@@ -122,54 +122,65 @@ class _settings_screenState extends State<settings_screen> {
               shape: RoundedRectangleBorder(
                    borderRadius: BorderRadius.circular(50),
                  ),
-              color: Color.fromARGB(255, 190, 157, 55),
+              color: Color.fromARGB(255, 175, 175, 175),
               child: ListTile(
-                leading: CircleAvatar(),
+                leading: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.person),
+                ),
                 title: Text("About"),
               ),
             ),
             Card(
-              child: Container(
-              height: 100,
-              width: 200,
-                color: Color.fromARGB(255, 144, 144, 144),
-                child: ListTile(
-                  leading: CircleAvatar(),
-                  title: Text("Share"),
+              shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(50),
+                 ),
+              color: Color.fromARGB(255, 175, 175, 175),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.share),
                 ),
+                title: Text("Share"),
               ),
             ),
             Card(
-              child: Container(
-              height: 100,
-              width: 200,
-                color: Color.fromARGB(255, 144, 144, 144),
-                child: ListTile(
-                  leading: CircleAvatar(),
-                  title: Text("Notification"),
+              shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(50),
+                 ),
+              color: Color.fromARGB(255, 175, 175, 175),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.notification_add),
                 ),
+                title: Text("Notificaton"),
               ),
             ),
             Card(
-              child: Container(
-              height: 100,
-              width: 200,
-                color: Color.fromARGB(255, 144, 144, 144),
-                child: ListTile(
-                  leading: CircleAvatar(),
-                  title: Text("Terms And Conditions"),
+              shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(50),
+                 ),
+              color: Color.fromARGB(255, 175, 175, 175),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.rule),
                 ),
+                title: Text("Terms and Conditions"),
               ),
             ),
             Card(
-              child: Container(
-              height: 100,
-              width: 200,
-                color: Color.fromARGB(255, 144, 144, 144),
-                child: ListTile(
-                  leading: CircleAvatar(),
-                  title: Text("Privacy & Policy"),
+              shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(50),
+                 ),
+              color: Color.fromARGB(255, 175, 175, 175),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.privacy_tip),
                 ),
+                title: Text("Privacy and Policy"),
               ),
             ),
           ],

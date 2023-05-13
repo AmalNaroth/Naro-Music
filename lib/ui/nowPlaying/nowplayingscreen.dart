@@ -74,12 +74,19 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 90,),
                     Container(
-                        color: Colors.amber,
-                        child: QueryArtworkWidget(
-                          id: int.parse(playing.audio.audio.metas.id!),
-                          type: ArtworkType.AUDIO,
-                          nullArtworkWidget: Icon(Icons.music_note_rounded),
+                        color: Colors.transparent,
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          child: QueryArtworkWidget(
+                            id: int.parse(playing.audio.audio.metas.id!),
+                            type: ArtworkType.AUDIO,
+                            nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/images/Naro logo.png',),
+                           radius: 100,
+                            ),
+                          ),
                         )),
                     Spacer(),
                     Container(

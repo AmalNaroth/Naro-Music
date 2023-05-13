@@ -100,7 +100,7 @@ class _homescreenState extends State<homescreen> {
                    child: ValueListenableBuilder(
                      valueListenable:  allSongListNotifier,
                      builder: (BuildContext ctx, List<songsmodel>newlist, Widget? child) {
-                       return ListView.builder(
+                       return !newlist.isEmpty ? ListView.builder(
                       itemCount: newlist.length,
                       itemBuilder: (context, index) {
                         final data=newlist[index];
@@ -138,6 +138,8 @@ class _homescreenState extends State<homescreen> {
                           child: songlistbar(data: data, index: index, context: context, songslist: newlist),
                         );
                       },
+                     ):Center(
+                      child: Text("No songs found",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
                      );
                      },
                    ),

@@ -35,21 +35,21 @@ class _favlistscreenState extends State<favlistscreen> {
           child: ValueListenableBuilder(
             valueListenable: favsongListNotifier,
             builder: (BuildContext ctx, List<songsmodel>favlist, Widget? child) {
-              return ListView.builder(
+              return favlist.isNotEmpty ? ListView.builder(
              itemCount: favlist.length,
              itemBuilder: (context, index) {
                final data=favlist[index];
                return Container(
-                color: Color.fromARGB(255, 171, 170, 170),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 171, 170, 170),
+                  borderRadius: BorderRadius.circular(15)
+                ),
                  margin: EdgeInsets.only(bottom: 5),
-                 child: ListTile(
-                   shape: RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(12),
-                   ),
+                 child:
+                 ListTile(
                    leading: QueryArtworkWidget(id: data.id, type:ArtworkType.AUDIO,
-                   nullArtworkWidget: Icon(Icons.music_note_rounded),
+                   nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/images/Naro logo.png'),),
                    ),
-          
                    title: Text(data.songName,overflow: TextOverflow.ellipsis,),
                    subtitle: Text(data.artistName,overflow: TextOverflow.ellipsis,),
                    tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
@@ -67,13 +67,13 @@ class _favlistscreenState extends State<favlistscreen> {
                      ],
                    ),
                    onTap: () {
-                     playsongs(index, allSongListNotifier.value);
+                     playsongs(index, favlist);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                    },
                  ),
                );
              },
-                    );
+              ):Center(child: Text('No Favorite Songs',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),));
             },
           ),
     

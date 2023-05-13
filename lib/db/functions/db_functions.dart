@@ -166,6 +166,8 @@ void allMostPlayedListShow() async {
   mostplayedsongNotifier.notifyListeners();
 }
 
+
+
 bool favouritecheckings(songsmodel data) {
   for (var elements in favsongListNotifier.value) {
     if (data.id == elements.id) {

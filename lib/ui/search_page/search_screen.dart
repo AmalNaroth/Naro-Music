@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -21,7 +22,24 @@ class _search_screenState extends State<search_screen> {
    late List<songsmodel>songsdisplaylist=List<songsmodel>.from(allSongListNotifier.value);
 
   final _searchController=TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
+  @override
+  void initState() {
+    
+     _focusNode.addListener(_onFocusChange);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void _onFocusChange() {
+    FocusScope.of(context).unfocus();
+}
+  void dispose() {
+  _focusNode.removeListener(_onFocusChange);
+  _focusNode.dispose();
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -46,35 +64,38 @@ class _search_screenState extends State<search_screen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
-          child: TextFormField(
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search,color: Colors.black,),
-              hintText:"What do you want to listen to ?",
-              suffixIcon: IconButton(onPressed: (){
-                cleartext();
-              }, icon: Icon(Icons.clear,color: Colors.black),
-              ),
-              filled: true,
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-                borderRadius: BorderRadius.circular(50),
-
-              ),
-              enabledBorder: OutlineInputBorder(
+          child: FocusScope(
+            child: TextFormField(
+               focusNode: _focusNode,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search,color: Colors.black,),
+                hintText:"What do you want to listen to ?",
+                suffixIcon: IconButton(onPressed: (){
+                  cleartext();
+                }, icon: Icon(Icons.clear,color: Colors.black),
+                ),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(50),
+          
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                borderSide: BorderSide(color: Colors.grey),
+                borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                 ),
               ),
-              focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50.0),
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
-               ),
+              autofocus: true,
+              controller: _searchController,
+              cursorColor: Colors.black,
+              onChanged:(value) {
+                songsearch(value);
+              },
             ),
-            autofocus: true,
-            controller: _searchController,
-            cursorColor: Colors.black,
-            onChanged:(value) {
-              songsearch(value);
-            },
           ),
         ),
         Expanded(
