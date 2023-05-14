@@ -27,7 +27,7 @@ class _mainscreenState extends State<mainscreen> {
       resizeToAvoidBottomInset: false,
       body: routes[index],
       bottomNavigationBar: Container(
-        color: Colors.transparent,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
           child: GNav(

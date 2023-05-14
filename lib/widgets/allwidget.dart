@@ -161,42 +161,6 @@ class recentlyplayedandmostplayed extends StatelessWidget {
   }
 }
 
-// only drawer
-Widget mydrawder() {
-  return Container();
-}
-
-class drawerlist extends StatefulWidget {
-  const drawerlist({super.key});
-
-  @override
-  State<drawerlist> createState() => _drawerlistState();
-}
-
-class _drawerlistState extends State<drawerlist> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromARGB(255, 205, 205, 205),
-      width: double.infinity,
-      height: 200,
-      padding: EdgeInsets.only(top: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            height: 70,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage(""))),
-          ),
-          Text("Text")
-        ],
-      ),
-    );
-  }
-} //**drwer */
 
 // this is home page container show
 class ProductWidgets extends StatefulWidget {

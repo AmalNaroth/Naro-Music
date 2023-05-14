@@ -165,18 +165,6 @@ class _homescreenState extends State<homescreen> {
             ),
           ),
         ),
-        drawer: Drawer(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  drawerlist(),
-                  mydrawder()
-                ],
-              ),
-            ),
-          ),
-        ),
       ),
     ),
     );
