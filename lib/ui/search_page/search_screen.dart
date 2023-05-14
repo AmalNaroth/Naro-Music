@@ -161,12 +161,6 @@ class _search_screenState extends State<search_screen> {
           .where((element) =>
               element.songName.toLowerCase().startsWith(value.toLowerCase()))
           .toList();
-
-    // for(var elements in allSongListNotifier.value){
-    //   if(elements.songName.toLowerCase().startsWith(value.toLowerCase())){
-    //     songsdisplaylist.add(elements);
-    //   }
-    // }
     }
     
     );

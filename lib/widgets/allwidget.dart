@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
+import 'package:naromusic/ui/playlist_page/favroutiteList.dart';
+import 'package:naromusic/ui/playlist_page/mostplayedlist.dart';
+import 'package:naromusic/ui/playlist_page/recentlyList.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 Widget playbox(String text, int curretidx, int value) {
   return Container(
@@ -31,6 +37,7 @@ Widget playbox(String text, int curretidx, int value) {
       ));
 }
 
+//allsonglisting mainpage
 class songlistbar extends StatefulWidget {
   songlistbar(
       {super.key,
@@ -63,9 +70,8 @@ class _songlistbarState extends State<songlistbar> {
           backgroundImage: AssetImage('assets/images/Naro logo.png'),
         ),
       ),
-      title: Text(
+      title: TextScroll(
         widget.data.songName,
-        overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         widget.data.artistName,
@@ -153,6 +159,195 @@ class recentlyplayedandmostplayed extends StatelessWidget {
               ),
             ));
       },
+    );
+  }
+}
+
+// only drawer
+Widget mydrawder() {
+  return Container();
+}
+
+class drawerlist extends StatefulWidget {
+  const drawerlist({super.key});
+
+  @override
+  State<drawerlist> createState() => _drawerlistState();
+}
+
+class _drawerlistState extends State<drawerlist> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color.fromARGB(255, 205, 205, 205),
+      width: double.infinity,
+      height: 200,
+      padding: EdgeInsets.only(top: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            height: 70,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(image: AssetImage(""))),
+          ),
+          Text("Text")
+        ],
+      ),
+    );
+  }
+} //**drwer */
+
+// this is home page container show
+class ProductWidgets extends StatefulWidget {
+  const ProductWidgets({super.key});
+
+  @override
+  State<ProductWidgets> createState() => _ProductWidgetsState();
+}
+
+class _ProductWidgetsState extends State<ProductWidgets> {
+  List<Widget> containerNavigation = [
+    favlistscreen(),
+    recentlylistscreen(),
+    mostplayedlistScreen()
+  ];
+
+  List<String> containername = ["Favorite", "Recently Played", "Most Played"];
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.all(8),
+          child: SizedBox(
+            width: 250,
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: 250,
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        intensity: 1,
+                        shape: NeumorphicShape.flat,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(12),
+                        )),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        containerNavigation[index],
+                                  ));
+                            },
+                            child: Image.asset(
+                              'assets/image2/image${index}.jpg',
+                              height: 250,
+                              width: 250,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 184, 184, 184),
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 4,
+                                  spreadRadius: 4)
+                            ]),
+                        child: Text(
+                          containername[index],
+                          style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+//playlist listing
+
+class PlayListListing extends StatelessWidget {
+  PlayListListing({super.key, required this.index});
+  int index;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Neumorphic(
+        style: NeumorphicStyle(
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+            color: Color.fromARGB(255, 227, 225, 225),
+            intensity: 1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () {},
+                child: Image.asset(
+                  "assets/image2/image2.jpg",
+                  height: 150,
+                  width: double.infinity,
+                ),
+              ),
+              Text(
+                "PlayList Name",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black45),
+              ),
+              Text("Songs count",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                
+              ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

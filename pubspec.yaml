@@ -45,6 +45,7 @@ dependencies:
   shared_preferences: ^2.1.0
   slide_to_act: ^2.0.1
   slider_button: ^2.0.0
+  text_scroll: ^0.2.0
 
 dev_dependencies:
   build_runner: ^2.3.3
@@ -73,6 +74,9 @@ flutter:
     - assets/images/category3.jpg
     - assets/images/dq.jpg
     - assets/images/bgimage2.jpg
+    - assets/image2/image0.jpg
+    - assets/image2/image1.jpg
+    - assets/image2/image2.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

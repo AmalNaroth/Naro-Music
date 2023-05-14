@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
-import 'package:naromusic/ui/main_page/main_screen.dart';
+import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
 import 'package:naromusic/ui/username_page/userscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

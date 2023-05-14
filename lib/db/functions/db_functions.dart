@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -166,8 +167,6 @@ void allMostPlayedListShow() async {
   mostplayedsongNotifier.notifyListeners();
 }
 
-
-
 bool favouritecheckings(songsmodel data) {
   for (var elements in favsongListNotifier.value) {
     if (data.id == elements.id) {
@@ -175,4 +174,26 @@ bool favouritecheckings(songsmodel data) {
     }
   }
   return false;
+}
+
+//playlistadding
+
+void addplayListToDB(String ListNmae,BuildContext context)async{
+  final playListDB=await Hive.openBox<playlistmodel>('playlistdb');
+
+  bool flag=false;
+  for(var elements in playListDB.values){
+    if(elements.playlistname==ListNmae){
+      flag=true;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("PlayList Created")));
+      break;
+    }
+    print(elements.playlistname);
+    if(flag==false){
+      List<songsmodel> newplaylistarray=[];
+      final newplayList=playlistmodel(playlistname: ListNmae, playlistarray: newplaylistarray);
+      playListDB.add(newplayList);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("The PlayList Alredy In There")));
+    }
+  } 
 }
