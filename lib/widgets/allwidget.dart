@@ -10,30 +10,30 @@ import 'package:naromusic/ui/playlist_page/recentlyList.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-// Widget playbox(String text, int curretidx, int value) {
-//   return Container(
-//       color: curretidx == value
-//           ? Colors.grey
-//           : const Color.fromARGB(255, 63, 63, 63),
-//       child: Padding(
-//         padding: const EdgeInsets.all(12),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           children: [
-//             Image.asset(
-//               'assets/images/category1.jpg',
-//               height: curretidx == value ? 110 : 80,
-//             ),
-//             Text(
-//               text,
-//               style: TextStyle(
-//                   color: curretidx == value ? Colors.amber : Colors.black,
-//                   fontWeight: curretidx == value ? FontWeight.w900 : null),
-//             )
-//           ],
-//         ),
-//       ));
-// }
+Widget playbox(String text, int curretidx, int value) {
+  return Container(
+      color: curretidx == value
+          ? Colors.grey
+          : const Color.fromARGB(255, 63, 63, 63),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              'assets/images/category1.jpg',
+              height: curretidx == value ? 110 : 80,
+            ),
+            Text(
+              text,
+              style: TextStyle(
+                  color: curretidx == value ? Colors.amber : Colors.black,
+                  fontWeight: curretidx == value ? FontWeight.w900 : null),
+            )
+          ],
+        ),
+      ));
+}
 
 //allsonglisting mainpage
 class songlistbar extends StatefulWidget {
@@ -160,7 +160,6 @@ class recentlyplayedandmostplayed extends StatelessWidget {
     );
   }
 }
-
 
 // this is home page container show
 class ProductWidgets extends StatefulWidget {

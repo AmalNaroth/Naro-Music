@@ -68,7 +68,8 @@ class _search_screenState extends State<search_screen> {
             ),
           ),
           //SizedBox(height: 20,),
-          ListView.builder(
+          songsdisplaylist.isNotEmpty
+                    ? ListView.builder(
             itemCount: songsdisplaylist.length,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -126,7 +127,20 @@ class _search_screenState extends State<search_screen> {
     )
                       );
             },
-          )
+          ):Column(
+            children: [
+              SizedBox(height: 30,),
+              Center(
+                child: Text(
+                  'No match found',
+                  style: TextStyle(fontSize: 20,
+                  color: Colors.black54
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

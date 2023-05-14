@@ -5,6 +5,7 @@ import 'package:naromusic/ui/playlist_page/yourlibrary.dart';
 import 'package:naromusic/ui/search_page/search_screen.dart';
 import 'package:naromusic/ui/settings_page/settings_screen.dart';
 
+
 class mainscreen extends StatefulWidget {
   const mainscreen({super.key});
 
@@ -16,7 +17,6 @@ class _mainscreenState extends State<mainscreen> {
   int index=0;
   @override
   Widget build(BuildContext context) {
-    
     List routes=[
       homescreen(),
       playlist_screen(),

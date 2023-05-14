@@ -4,6 +4,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
+import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
+import 'package:naromusic/ui/bottom_navbarroot/drawer.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/widgets/allwidget.dart';
@@ -67,7 +69,7 @@ class _homescreenState extends State<homescreen> {
                        return  IconButton(onPressed:() {
                         Scaffold.of(context).openDrawer();
                       }, icon: Icon(Icons.more_vert),);
-                     },),
+                     },),                    
                       Text(
                         "N A R O M U S I C",
                         style: TextStyle(
@@ -165,6 +167,7 @@ class _homescreenState extends State<homescreen> {
             ),
           ),
         ),
+        drawer: drawerlist()
       ),
     ),
     );
