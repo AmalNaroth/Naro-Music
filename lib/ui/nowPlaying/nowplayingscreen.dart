@@ -4,12 +4,15 @@ import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/ui_functions/ui_functions.dart';
+import 'package:naromusic/ui/whiteshadowdesign/NueBox.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class nowplayingscreen extends StatefulWidget {
   nowplayingscreen({super.key, required this.data});
 
-  songsmodel data;
+  final songsmodel data;
 
   @override
   State<nowplayingscreen> createState() => _nowplayingscreenState();
@@ -20,210 +23,212 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
   @override
   Widget build(BuildContext context) {
     bool ischeck= favouritecheckings(widget.data);
-    return Scaffold(body: audioPlayer.builderCurrent(
+    return Scaffold(
+      body: audioPlayer.builderCurrent(
       builder: (context, playing) {
         int songid = int.parse(playing.audio.audio.metas.id!);
         findsong(songid);
-        return Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/bgimage2.jpg"))),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color.fromARGB(255, 255, 255, 255).withOpacity(0.0),
-                    Color.fromARGB(255, 86, 85, 85).withOpacity(0.2),
-                    Color.fromARGB(255, 74, 74, 74).withOpacity(0.7),
-                    Color.fromARGB(255, 0, 0, 0).withOpacity(1.0)
-                  ])),
-              child: Container(
-                // color: Colors.blue,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 45, horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Icon(
-                              Icons.more_vert_rounded,
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
+        return SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 25, left: 25, top: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: NeuBox(child: IconButton(onPressed: (){
+                          Navigator.of(context).pop();
+                        }, icon: Icon(Icons.arrow_drop_down)),),
                       ),
-                    ),
-                    SizedBox(height: 90,),
-                    Container(
-                        color: Colors.transparent,
-                        child: Container(
-                          height: 200,
-                          width: 200,
-                          child: QueryArtworkWidget(
-                            id: int.parse(playing.audio.audio.metas.id!),
-                            type: ArtworkType.AUDIO,
-                            nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/images/Naro logo.png',),
-                           radius: 100,
-                            ),
-                          ),
-                        )),
-                    Spacer(),
-                    Container(
-                      //color: Colors.red,
-                      height: MediaQuery.of(context).size.height / 2.5,
+                      Text("N A R O M U S I C"),
+                      SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: NeuBox(child: Icon(Icons.menu)),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  //cover art,song name artist name
+                  NeuBox(
                       child: Column(
-                        children: [
-                          //SizedBox(height: 40,),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 23, horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 7,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        playing.audio.audio.metas.title!,
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 280,
+                            width: 280,
+                            child: QueryArtworkWidget(id: int.parse(playing.audio.audio.metas.id!),
+                             type: ArtworkType.AUDIO,
+                             nullArtworkWidget: ClipRect(child: Image.asset('assets/images/Naro logo.png')
+                             ,)),
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextScroll(playing.audio.audio.metas.title!,
+                                  style: TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 23,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        playing.audio.audio.metas.artist!,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 19,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.grey.shade700)
                                   ),
-                                ),
-                                Expanded(
-                                  child: IconButton(
-                                    onPressed: () {
-                                      //addtofavroutiedbfunction(widget.data);
-                                      setState(() {
-                                        if(ischeck==false){
-                                           addtofavroutiedbfunction(widget.data,context);
-                                        }else{
-                                          favsongslistdelete(widget.data,context);
-                                        }
-                                        
-                                      });
-                                    },
-                                    icon:ischeck==true?
-                                     Icon(Icons.favorite): Icon(Icons.favorite_outline_outlined)
+                                  SizedBox(
+                                    height: 6,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              Slider(
-                                min: 0,
-                                max: 100,
-                                value: 40,
-                                onChanged: (value) {},
-                                activeColor: Colors.white,
-                                inactiveColor: Colors.grey,
+                                  TextScroll(
+                                    playing.audio.audio.metas.artist!,
+                                    style: TextStyle(
+                                       overflow: TextOverflow.ellipsis,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("02:10"),
-                                    Text("05:10"),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon:
-                                      Icon(Icons.shuffle, color: Colors.white)),
-                              IconButton(
-                                  onPressed: () {
-                                    audioPlayer.previous();
-                                  },
-                                  icon: Icon(
-                                    Icons.arrow_back_ios_new_outlined,
-                                    color: Colors.white,
-                                  )),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if(ischeck==false){
+                                      addtofavroutiedbfunction(widget.data,context);
+                                    }else{
+                                      favsongslistdelete(widget.data,context);
+                                    }
+                                  });
+                                },
+                                  icon:ischeck==true?
+                                     Icon(Icons.favorite,size: 32,): Icon(Icons.favorite_outline_outlined,size: 32,)
+                                )
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  //start time shuffle end time repeact icons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("0:00"),
+                      Icon(Icons.shuffle),
+                      Icon(Icons.repeat),
+                      Text("4:55")
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  //linear bar,
+
+                  NeuBox(
+                    child: LinearPercentIndicator(
+                      lineHeight: 10,
+                      percent: 0.5,
+                      progressColor: Colors.blue.shade400,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 40,
+                  ),
+                  //previous next skip
+
+                  SizedBox(
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: NeuBox(
+                                child: IconButton(
+                                    onPressed: () {
+                                      audioPlayer.previous();
+                                    },
+                                    icon: Icon(
+                                      Icons.skip_previous,
+                                      size: 32,
+                                    )))),
+                        Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: NeuBox(
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
                                       if (playstate == false) {
                                         playstate = true;
                                       } else {
                                         playstate = false;
-                                      }
-                                    });
-                                    audioPlayer.playOrPause();
-                                  },
-                                  icon: playstate == false
-                                      ? Icon(Icons.play_arrow,
-                                          color: Colors.white)
-                                      : Icon(Icons.pause, color: Colors.white)),
-                              IconButton(
-                                  onPressed: () {
-                                    audioPlayer.next();
-                                  },
-                                  icon: Icon(Icons.arrow_forward_ios_outlined,
-                                      color: Colors.white)),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.play_arrow,
-                                      color: Colors.white))
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                                      }});
+                                      audioPlayer.playOrPause();
+                                      },
+                                        icon: playstate == false
+                                      ? Icon(Icons.play_arrow,size: 32,)
+                                      : Icon(Icons.pause, size: 32,))
+                                      ))),
+                        Expanded(
+                            child: NeuBox(
+                                child: IconButton(
+                                    onPressed: () {
+                                      audioPlayer.next();
+                                    },
+                                    icon: Icon(
+                                      Icons.skip_next,
+                                      size: 32,
+                                    ))))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("L Y R I C S"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child:
+                        NeuBox(
+                          child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text('''Road shimmer wigglin' the vision
+                        Heat, heat waves, I'm swimmin' in a mirror
+                        Road shimmer wigglin' the vision
+                        Heat, heat waves, I'm swimmin' in a
+                        Sometimes, all I think about is you
+                        Late nights in the middle of June
+                        Heat waves been fakin' me out
+                        Can't make you happier now
+                        Sometimes, all I think about is you
+                        Late nights in the middle of June
+                        Heat waves been fakin' me out
+                        Can't make you happier now''',textAlign: TextAlign.start,),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  )
+                ],
               ),
             ),
           ),
