@@ -10,6 +10,6 @@ ValueNotifier<List<songsmodel>>recentlyPlayedNotifier= ValueNotifier([]);
 
 ValueNotifier<List<songsmodel>>mostplayedsongNotifier=ValueNotifier([]);
 
-ValueNotifier<List<songsmodel>>newplaylistnotifier=ValueNotifier([]);
+ValueNotifier<List<songsmodel>>playlistsongnotifier=ValueNotifier([]);
 
-ValueNotifier<List<playlistmodel>>playlistnotifier=ValueNotifier([]);
+ValueNotifier<List<playlistmodel>>playlistnamenotifier=ValueNotifier([]);

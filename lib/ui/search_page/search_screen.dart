@@ -4,7 +4,7 @@ import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
-import 'package:naromusic/ui/whiteshadowdesign/NueBox.dart';
+import 'package:naromusic/widgets/allwidget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 

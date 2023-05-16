@@ -1,39 +1,17 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
+import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
-import 'package:naromusic/ui/playlist_page/favroutiteList.dart';
-import 'package:naromusic/ui/playlist_page/mostplayedlist.dart';
-import 'package:naromusic/ui/playlist_page/recentlyList.dart';
+import 'package:naromusic/ui/favourite_songs/favourite_songs_list.dart';
+import 'package:naromusic/ui/most_played/mostplayed_songs_list.dart';
+import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
+import 'package:naromusic/ui/recently_played/recently_played_list.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-Widget playbox(String text, int curretidx, int value) {
-  return Container(
-      color: curretidx == value
-          ? Colors.grey
-          : const Color.fromARGB(255, 63, 63, 63),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              'assets/images/category1.jpg',
-              height: curretidx == value ? 110 : 80,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                  color: curretidx == value ? Colors.amber : Colors.black,
-                  fontWeight: curretidx == value ? FontWeight.w900 : null),
-            )
-          ],
-        ),
-      ));
-}
 
 //allsonglisting mainpage
 class songlistbar extends StatefulWidget {
@@ -79,7 +57,9 @@ class _songlistbarState extends State<songlistbar> {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.list)),
+          IconButton(onPressed: () {
+            callingBottomSheet(context,widget.data);
+          }, icon: Icon(Icons.list)),
           IconButton(
               onPressed: () {
                 setState(() {
@@ -107,6 +87,8 @@ class _songlistbarState extends State<songlistbar> {
   }
 }
 
+
+//recentplay and most play listing listviewbuilder
 class recentlyplayedandmostplayed extends StatelessWidget {
   recentlyplayedandmostplayed(
       {super.key,
@@ -161,7 +143,7 @@ class recentlyplayedandmostplayed extends StatelessWidget {
   }
 }
 
-// this is home page container show
+// The home page three container Fav,Recently,Most
 class ProductWidgets extends StatefulWidget {
   const ProductWidgets({super.key});
 
@@ -263,52 +245,245 @@ class _ProductWidgetsState extends State<ProductWidgets> {
   }
 }
 
-//playlist listing
-
+//playlist container showing
 class PlayListListing extends StatelessWidget {
-  PlayListListing({super.key, required this.index});
+  PlayListListing({super.key, required this.index,required this.data});
   int index;
+  playlistmodel data;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Neumorphic(
-        style: NeumorphicStyle(
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-            color: Color.fromARGB(255, 227, 225, 225),
-            intensity: 1),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Image.asset(
+      child: GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PlayListSongListing(data: data),));
+        },
+        child: Neumorphic(
+          style: NeumorphicStyle(
+              shape: NeumorphicShape.flat,
+              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+              color: Color.fromARGB(255, 227, 225, 225),
+              intensity: 1),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20,),
+                Image.asset(
                   "assets/image2/image2.jpg",
-                  height: 150,
+                  height: 140,
                   width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-              ),
-              Text(
-                "PlayList Name",
+                SizedBox(height: 10,),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                   Text(
+                      data.playlistname.toUpperCase(),
+                       style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black45),
+                                 ),
+                SizedBox(height: 5,),
+                Text("Songs count",
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black45),
-              ),
-              Text("Songs count",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                
-              ),
-              )
-            ],
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+                )
+                ],),
+                InkWell(
+                  onTap: () {
+                    playlistdelete(data,context);
+                  },
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                        shape: NeumorphicShape.flat,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(12)),
+                        intensity: 1,
+                        color: Color.fromARGB(255, 217, 217, 217)),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child:  Icon(Icons.delete)),
+                    ),
+                  ),
+               ],)
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+//common white shade design
+
+class NeuBox extends StatefulWidget {
+  final child;
+  NeuBox({super.key, required this.child});
+
+  @override
+  State<NeuBox> createState() => _NeuBoxState();
+}
+
+class _NeuBoxState extends State<NeuBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(8),
+      child: Center(child: widget.child,),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.grey[300],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade500,
+                blurRadius: 15,
+                offset: Offset(5,5,)
+              ),
+              BoxShadow(
+                color: Colors.white,
+                blurRadius: 15,
+                offset: Offset(-5,-5)
+              )
+            ]
+          ),
+        );
+  }
+}
+
+// playlistcreationbootmsheet
+  void callingBottomSheet(BuildContext context,songsmodel songdata) {
+    addplaylistdbtovaluelistenable();
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 230, 230, 230),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+        ),
+        height: 400,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text('P L A Y L I S T',style: TextStyle(fontSize: 25,color: Colors.black45),),
+            ),
+            Expanded(
+              child: ValueListenableBuilder(
+                valueListenable: playlistnamenotifier,
+                builder: (BuildContext context, List<playlistmodel> playlistname, Widget? child) {
+                  return !playlistname.isEmpty ? ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: playlistname.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final data=playlistname[index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade400,
+                        borderRadius: BorderRadius.circular(12)
+                      ),
+                    margin: EdgeInsets.only(bottom: 5,right: 15,left: 15),
+                                  child: ListTile(
+                    leading: CircleAvatar(),
+                    title: Text(data.playlistname),
+                    tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
+                    onTap: () {
+                      songaddtoplaylistdatabase(data.playlistname,songdata, context);
+                    },
+                  )
+                                );
+                  },
+                ):Center(child: Text("No Play List Add"),);
+                }
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  //songslisting adding time listing in bottommodel plus
+
+  void callingBottomSheetsonglisting(BuildContext context,String listname) {
+    addplaylistdbtovaluelistenable();
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 230, 230, 230),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+        ),
+        height: 400,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text('A L L S O N G L I S T',style: TextStyle(fontSize: 25,color: Colors.black45),),
+            ),
+            Expanded(
+              child:ListView.builder(
+              shrinkWrap: true,
+              itemCount: allSongListNotifier.value.length,
+              itemBuilder: (BuildContext context, int index) {
+                final data=allSongListNotifier.value[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                margin: EdgeInsets.only(bottom: 5,right: 15,left: 15),
+                              child: ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      leading: QueryArtworkWidget(
+        id:data.id,
+        type: ArtworkType.AUDIO,
+        nullArtworkWidget: CircleAvatar(
+          backgroundImage: AssetImage('assets/images/Naro logo.png'),
+        ),
+      ),
+      title: TextScroll(
+        data.songName,
+      ),
+      subtitle: Text(
+        data.artistName,
+        overflow: TextOverflow.ellipsis,
+      ),
+      tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
+      trailing: IconButton(onPressed: (){
+        songaddtoplaylistdatabase(listname,data,context);
+      }, icon: Icon(Icons.add))
+    )
+      );
+              },
+                ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+

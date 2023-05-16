@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:naromusic/db/db_List/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
+import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
@@ -82,3 +84,4 @@ class _favlistscreenState extends State<favlistscreen> {
     );
   }
 }
+

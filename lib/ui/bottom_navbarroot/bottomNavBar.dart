@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
-import 'package:naromusic/ui/playlist_page/yourlibrary.dart';
+import 'package:naromusic/ui/playlist_page/playlist_listing.dart';
 import 'package:naromusic/ui/search_page/search_screen.dart';
 import 'package:naromusic/ui/settings_page/settings_screen.dart';
 

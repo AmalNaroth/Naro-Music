@@ -29,6 +29,9 @@ checkpermission() async{
   }else{
     checkpermission();
   }
+
+  AllsongsdatashowList();
+  allsongsfavlistshow();
 }      
 
   List <Audio> audio=[];

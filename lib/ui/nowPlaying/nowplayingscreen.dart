@@ -4,7 +4,7 @@ import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/ui_functions/ui_functions.dart';
-import 'package:naromusic/ui/whiteshadowdesign/NueBox.dart';
+import 'package:naromusic/widgets/allwidget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -147,10 +147,10 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                   ),
 
                   SizedBox(
-                    height: 40,
+                    height: 35,
                   ),
                   //previous next skip
-
+                  
                   SizedBox(
                     height: 80,
                     child: Row(
