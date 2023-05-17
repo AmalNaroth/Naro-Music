@@ -14,25 +14,10 @@ class playlist_screen extends StatefulWidget {
 }
 
 class _playlist_screenState extends State<playlist_screen> {
-  final _playlisttexcontroller = TextEditingController();
-
-  void _submitForm() {
-    final textValue = _playlisttexcontroller.text;
-    print('textcontroller = ${textValue}');
-    List<songsmodel> listarray = [];
-    addplaylisttodatabase(textValue, listarray, context);
-    Navigator.pop(context);
-  }
-
-  @override
-  void dispose() {
-    _playlisttexcontroller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     addplaylistdbtovaluelistenable();
+    final obj=createnewplaylist(context);
     return Material(
         color: Colors.white,
         child: SingleChildScrollView(
@@ -59,7 +44,7 @@ class _playlist_screenState extends State<playlist_screen> {
                     ),
                     InkWell(
                       onTap: () {
-                        createnewolayList();
+                        obj.createnewolayList(context);
                       },
                       child: Neumorphic(
                         style: NeumorphicStyle(
@@ -124,105 +109,5 @@ class _playlist_screenState extends State<playlist_screen> {
             ],
           ),
         )));
-  }
-
-  void createnewolayList(){
-    showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey.withOpacity(0.8),
-            Colors.white.withOpacity(0.8),
-            Colors.grey.withOpacity(0.8),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: AlertDialog(
-        title: Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              spreadRadius: 2)
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 100,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  labelText: "Enter the playlist name",
-                                  labelStyle: TextStyle(color: Colors.black26),
-                                  border: InputBorder.none),
-                              controller: _playlisttexcontroller,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Please enter the name";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                        Icon(
-                          Icons.add,
-                          color: Colors.black26,
-                        )
-                      ],
-                    ),
-                  ),
-                )),
-        actions: [
-          InkWell(
-              onTap: _submitForm,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Neumorphic(
-                    style: NeumorphicStyle(
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                        BorderRadius.circular(20),
-                      ),
-                      color: Colors.white,
-                      intensity: 1,
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Create",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  },
-);
   }
 }

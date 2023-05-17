@@ -14,6 +14,7 @@ class userscreen extends StatefulWidget {
 class _userscreenState extends State<userscreen> {
   final _usernamecontroller=TextEditingController();
   String? imagepath;
+  final _formkey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +46,24 @@ class _userscreenState extends State<userscreen> {
             SizedBox(height: 120,),
             Text("ENTER YOUR NAME",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
             SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextFormField(
-                controller: _usernamecontroller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50)
+            Form(
+              key: _formkey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextFormField(
+                  controller: _usernamecontroller,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50)
+                    ),
+                    labelText: "User name",
                   ),
-                  labelText: "User name",
+                  validator: (value) {
+                    if(value==null||value.isEmpty){
+                      return "Enter your name";
+                    }
+                    return null;
+                  },
                 ),
               ),
             ),
@@ -63,8 +73,10 @@ class _userscreenState extends State<userscreen> {
               child: SlideAction(
                 outerColor: Colors.black,
                 onSubmit: () {
-                  widget.onAddUserName(_usernamecontroller.text);
+                  if(_formkey.currentState!.validate()){
+                     widget.onAddUserName(_usernamecontroller.text);
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => mainscreen(),), (route) => false);
+                  }
                 },
                 text: "Start",
               ),
