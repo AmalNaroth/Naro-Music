@@ -102,21 +102,28 @@ class _recentlylistscreenState extends State<recentlylistscreen> {
           child: ValueListenableBuilder(
             valueListenable: recentlyPlayedNotifier,
            builder: (BuildContext context, List<songsmodel> recentlist, Widget? child,){
-            return ListView.builder(
+            return !recentlist.isEmpty ? ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
             itemCount: recentlist.length,
             itemBuilder: (BuildContext context, int index) {
               final data=recentlist[index];
-              return !recentlist.isEmpty ? Container(
+              return Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 214, 214, 214),
                   borderRadius: BorderRadius.circular(15)
                 ),
                 margin: EdgeInsets.only(bottom: 5),
                 child: recentlyplayedandmostplayed(data: data, index: index, newlist: recentlist)
-              ):Text("No songs");
+              );
             },
+          ):Column(
+            children: [
+              SizedBox(height: 300,),
+              Center(child: Text("NO SONGS",style: TextStyle(color: Colors.black54,fontWeight: FontWeight.w500,
+              fontSize: 18
+              ),)),
+            ],
           );
           }
           )

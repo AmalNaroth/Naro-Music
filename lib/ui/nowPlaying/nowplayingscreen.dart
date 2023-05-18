@@ -11,6 +11,9 @@ import 'package:text_scroll/text_scroll.dart';
 
 import '../music_lyrics/musicLyrics.dart';
 
+bool isshuffle = false;
+bool isloop = false;
+
 class nowplayingscreen extends StatefulWidget {
   nowplayingscreen({super.key, required this.data});
 
@@ -182,8 +185,31 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
               final ss = (position.inSeconds %60).toString().padLeft(2,'0');
               return Text('${mm}:${ss}');
             },),
-                      Icon(Icons.shuffle),
-                      Icon(Icons.repeat),
+                      IconButton(onPressed: (){
+                        setState(() {
+                          if(isshuffle == false){
+                            audioPlayer.toggleShuffle();
+                            isshuffle = true;
+                          }else{
+                            audioPlayer.toggleShuffle();
+                            isshuffle = false;
+                          }
+                        });
+
+                      }, icon:isshuffle==false? Icon(Icons.shuffle):Icon(Icons.shuffle,color: Colors.amber,)),
+                      IconButton(onPressed: (){
+                        setState(() {
+                          if(isloop == false){
+                            audioPlayer.setLoopMode(LoopMode.single);
+                            isloop = true;
+                          }else{
+                            audioPlayer.setLoopMode(LoopMode.playlist);
+                            isloop = false;
+                          }
+                        });
+
+                      }, icon:isloop==false ? Icon(Icons.repeat):Icon(Icons.repeat,color: Colors.amber,),),
+
                       PlayerBuilder.current(player: audioPlayer, builder: (context, playing) {
               final totalduration = playing.audio.duration;
               final mm = (totalduration.inMinutes %60).toString().padLeft(2,'0');
@@ -213,7 +239,6 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                     height: 35,
                   ),
                   //previous next skip
-                  
                   SizedBox(
                     height: 80,
                     child: Row(
@@ -241,14 +266,11 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                                   , builder: (context, isPlaying) {
                                     return IconButton(
                                       onPressed: () {
-                                       
                                       if (isPlaying == false) {
                                         audioPlayer.play();
                                       } else {
                                         audioPlayer.pause();
                                       }
-                                     
-                                      
                                       },
                                         icon: isPlaying == false
                                       ? Icon(Icons.play_arrow,size: 32,)

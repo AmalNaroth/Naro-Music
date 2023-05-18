@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
        // useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
         textTheme: Theme.of(context).textTheme.apply(
           bodyColor: Color.fromARGB(255, 0, 0, 0),
           displayColor: Color.fromARGB(255, 0, 0, 0)

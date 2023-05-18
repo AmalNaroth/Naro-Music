@@ -128,7 +128,7 @@ class _mostplayedlistScreenState extends State<mostplayedlistScreen> {
           child: ValueListenableBuilder(
             valueListenable: mostplayedsongNotifier,
            builder: (BuildContext context, List<songsmodel> mostplayed, Widget? child,){
-            return ListView.builder(
+            return !mostplayed.isEmpty ? ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
             itemCount: mostplayed.length,
@@ -143,6 +143,13 @@ class _mostplayedlistScreenState extends State<mostplayedlistScreen> {
                 child: recentlyplayedandmostplayed(data: data, index: index, newlist: mostplayed)
               ):Text("No songs");
             },
+          ):Column(
+            children: [
+              SizedBox(height: 300,),
+              Center(child: Text("NO SONGS",style: TextStyle(color: Colors.black54,fontWeight: FontWeight.w500,
+              fontSize: 18
+              ),)),
+            ],
           );
           }
           )

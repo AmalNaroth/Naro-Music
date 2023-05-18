@@ -129,13 +129,13 @@ class _favlistscreenState extends State<favlistscreen> {
           child: ValueListenableBuilder(
             valueListenable: favsongListNotifier,
            builder: (BuildContext context, List<songsmodel> favlist, Widget? child,){
-            return ListView.builder(
+            return !favlist.isEmpty ? ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
             itemCount: favlist.length,
             itemBuilder: (BuildContext context, int index) {
               final data=favlist[index];
-              return !favlist.isEmpty ? Container(
+              return Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 214, 214, 214),
                   borderRadius: BorderRadius.circular(15)
@@ -167,8 +167,15 @@ class _favlistscreenState extends State<favlistscreen> {
                      playsongs(index, favlist);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                    },
-                )):Text("No songs");
+                ));
             },
+          ):Column(
+            children: [
+              SizedBox(height: 300,),
+              Center(child: Text("NO SONGS",style: TextStyle(color: Colors.black54,fontWeight: FontWeight.w500,
+              fontSize: 18
+              ),)),
+            ],
           );
           }
           )

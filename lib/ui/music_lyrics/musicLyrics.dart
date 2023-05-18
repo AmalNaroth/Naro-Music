@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
- lyricsBottom(context, titlename, artistname) async {
+// return getLyrics(audioPlayer.getCurrentAudioTitle, audioPlayer.getCurrentAudioArtist);
+
+void lyricsBottom(context, titlename, artistname) async {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(

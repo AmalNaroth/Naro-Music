@@ -48,5 +48,5 @@ playsongs(index,List songlist){
     title: elements.songName
     )));
   }
-  audioPlayer.open(Playlist(audios: audio,startIndex: index),autoStart: true,showNotification: true);
+  audioPlayer.open(Playlist(audios: audio,startIndex: index),autoStart: true,showNotification: true,loopMode: LoopMode.playlist);
 }

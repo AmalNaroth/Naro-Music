@@ -76,13 +76,13 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
           child: ValueListenableBuilder(
             valueListenable: playlistsongnotifier
           , builder: (BuildContext context, List<songsmodel> playlistarrysongs, Widget? child,){
-            return ListView.builder(
+            return  !playlistarrysongs.isEmpty ?  ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
             itemCount: playlistarrysongs.length,
             itemBuilder: (BuildContext context, int index) {
               final data=playlistarrysongs[index];
-              return !playlistarrysongs.isEmpty ? Container(
+              return Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 171, 170, 170),
                   borderRadius: BorderRadius.circular(15)
@@ -135,15 +135,22 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
     );
   },
 );
-                           },
+   },
                            icon: Icon(Icons.delete)),
                    onTap: () {
                      playsongs(index, playlistarrysongs);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => nowplayingscreen(data: data,),));
                    },
                 ),
-              ):Text("No songs");
+              );
             },
+          ):Column(
+            children: [
+              SizedBox(height: 300,),
+              Center(child: Text("NO SONGS",style: TextStyle(color: Colors.black54,fontWeight: FontWeight.w500,
+              fontSize: 18
+              ),)),
+            ],
           );
           }
           
