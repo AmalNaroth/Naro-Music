@@ -177,10 +177,20 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("0:00"),
+                      PlayerBuilder.currentPosition(player: audioPlayer, builder: (context, position) {
+                       final mm = (position.inMinutes %60).toString().padLeft(2,'0');
+              final ss = (position.inSeconds %60).toString().padLeft(2,'0');
+              return Text('${mm}:${ss}');
+            },),
                       Icon(Icons.shuffle),
                       Icon(Icons.repeat),
-                      Text("4:55")
+                      PlayerBuilder.current(player: audioPlayer, builder: (context, playing) {
+              final totalduration = playing.audio.duration;
+              final mm = (totalduration.inMinutes %60).toString().padLeft(2,'0');
+              final ss = (totalduration.inSeconds %60).toString().padLeft(2,'0');
+              return Text('${mm}:${ss}');
+            },)
+                      
                     ],
                   ),
                   SizedBox(
@@ -190,12 +200,13 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                   //linear bar,
 
                   NeuBox(
-                    child: LinearPercentIndicator(
-                      lineHeight: 10,
-                      percent: 0.5,
-                      progressColor: Colors.blue.shade400,
-                      backgroundColor: Colors.transparent,
-                    ),
+                    // child: LinearPercentIndicator(
+                    //   lineHeight: 10,
+                    //   percent: 0.5,
+                    //   progressColor: Colors.blue.shade400,
+                    //   backgroundColor: Colors.transparent,
+                    // ),
+                    child: musicsliders(),
                   ),
 
                   SizedBox(

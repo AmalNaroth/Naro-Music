@@ -23,7 +23,7 @@ class privacydialoge extends StatelessWidget {
             data: snapshot.data!,
            );
          }
-         return CircularProgressIndicator();
+         return Center(child: CircularProgressIndicator());
         },)),
         ElevatedButton(onPressed: () => Navigator.of(context).pop(),child: Container(
           decoration: BoxDecoration(
