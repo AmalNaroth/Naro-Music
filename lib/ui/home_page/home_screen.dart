@@ -7,35 +7,27 @@ import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
 import 'package:naromusic/ui/bottom_navbarroot/drawer.dart';
-import 'package:naromusic/ui/controllers/player_controller.dart';
-import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
 import 'package:naromusic/widgets/allwidget.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
 
   @override
-  State<homescreen> createState() => _homescreenState();
+  State<homescreen> createState() => homescreenState();
 }
 
 final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
 
-class _homescreenState extends State<homescreen> {
-  String? savedName;
+class homescreenState extends State<homescreen> {
+ 
   DateTime? savedDate;
 
   List categories = ["Played", "Most Played", "Recently Played", "Best Songs"];
 
   //shared preferences name assigning
-  Future<void> username() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      savedName = sharedPrefs.getString('Save_Name');
-    });
-  }
+  
 
   Future<void> _selectedTime() async {}
 
@@ -43,7 +35,7 @@ class _homescreenState extends State<homescreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    username();
+    //username();
   }
 
   @override

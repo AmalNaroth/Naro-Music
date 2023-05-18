@@ -38,9 +38,9 @@ checkpermission() async{
   List <Audio> audio=[];
   
 playsongs(index,List songlist){
-  // bool isPlaying=true;
-  // isSongPlayingNotifier.value=isPlaying;
-  // isSongPlayingNotifier.notifyListeners();
+  bool isPlaying=true;
+  isSongPlayingNotifier.value=isPlaying;
+  isSongPlayingNotifier.notifyListeners();
   audio.clear();
   for(var elements in songlist){
     audio.add(Audio.file(elements.uri,metas: Metas(id: elements.id.toString(),
@@ -48,5 +48,5 @@ playsongs(index,List songlist){
     title: elements.songName
     )));
   }
-  audioPlayer.open(Playlist(audios: audio,startIndex: index),autoStart: false,showNotification: true);
+  audioPlayer.open(Playlist(audios: audio,startIndex: index),autoStart: true,showNotification: true);
 }

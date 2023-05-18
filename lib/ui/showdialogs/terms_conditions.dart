@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class privacydialoge extends StatelessWidget {
-   privacydialoge({super.key,this.radius=8,required this.mdFileName}):assert(mdFileName.contains('.md'));
+   privacydialoge({super.key,this.radius=8,required this.mdFileName1}):assert(mdFileName1.contains('.md'));
   final double radius;
-  final String mdFileName;
+  final String mdFileName1;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class privacydialoge extends StatelessWidget {
         Expanded(child: 
         FutureBuilder(
           future: Future.delayed(Duration(milliseconds: 150)).then((value) {
-            return rootBundle.loadString("assets/privacypolicy/$mdFileName");
+            return rootBundle.loadString("assets/privacypolicy/$mdFileName1");
           }),
           builder: (context, snapshot) {
          if(snapshot.hasData){
@@ -27,6 +27,7 @@ class privacydialoge extends StatelessWidget {
         },)),
         ElevatedButton(onPressed: () => Navigator.of(context).pop(),child: Container(
           decoration: BoxDecoration(
+            color: Colors.black,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(radius),
               bottomRight: Radius.circular(radius)

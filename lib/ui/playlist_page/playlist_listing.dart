@@ -101,7 +101,7 @@ class _playlist_screenState extends State<playlist_screen> {
                   ):Column(
                     children: [
                       SizedBox(height: 300,),
-                      Center(child: Text("NO PLAY LIST",style: TextStyle(color: Colors.black54,fontSize: 20),),),
+                      Center(child: Text("NO PLAY LIST",style: TextStyle(color: Colors.black54,fontSize: 18,fontWeight: FontWeight.w500),),),
                     ],
                   );
                 },

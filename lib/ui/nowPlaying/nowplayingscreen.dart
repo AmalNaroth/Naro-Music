@@ -24,12 +24,15 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
   bool playstate = false;
   @override
   Widget build(BuildContext context) {
-    bool ischeck= favouritecheckings(widget.data);
+    
+    
     return Scaffold(
       body: audioPlayer.builderCurrent(
       builder: (context, playing) {
         int songid = int.parse(playing.audio.audio.metas.id!);
         findsong(songid);
+        songsmodel sondata = findsongwithid(songid);
+        bool ischeck= favouritecheckings(sondata);
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: SafeArea(
@@ -208,7 +211,10 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                             child: NeuBox(
                                 child: IconButton(
                                     onPressed: () {
-                                      audioPlayer.previous();
+                                      setState(() {
+                                        audioPlayer.previous();
+                                      });
+                                      
                                     },
                                     icon: Icon(
                                       Icons.skip_previous,
@@ -243,7 +249,9 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                             child: NeuBox(
                                 child: IconButton(
                                     onPressed: () {
-                                      audioPlayer.next();
+                                      setState(() {
+                                        audioPlayer.next();
+                                      });  
                                     },
                                     icon: Icon(
                                       Icons.skip_next,

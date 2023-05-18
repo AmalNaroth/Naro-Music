@@ -1,11 +1,9 @@
 import 'dart:ui';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/ui/ui_functions/ui_functions.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 class MiniPlayer extends StatefulWidget {
@@ -87,25 +85,23 @@ class _MiniPlayerState extends State<MiniPlayer> {
                             color: Colors.white,
                             // iconSize: 35,
                             icon: Icon(Icons.skip_previous_rounded)),
-                        IconButton(
+                        PlayerBuilder.isPlaying(player: audioPlayer, builder: (context, isPlaying) {
+                          return IconButton(
                             onPressed: () {
                               if (isPlaying) {
                                 audioPlayer.pause();
-                                setState(() {
-                                  isPlaying = false;
-                                });
+                                
                               } else {
                                 audioPlayer.play();
-                                setState(() {
-                                  isPlaying = true;
-                                });
+                                
                               }
                             },
                             // iconSize: 30,
                             color: Colors.white,
                             icon: isPlaying
                                 ? Icon(Icons.pause)
-                                : Icon(Icons.play_arrow)),
+                                : Icon(Icons.play_arrow));
+                        },),
                         IconButton(
                             onPressed: () {
                               audioPlayer.next();
