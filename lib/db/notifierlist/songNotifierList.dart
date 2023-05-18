@@ -13,3 +13,5 @@ ValueNotifier<List<songsmodel>>mostplayedsongNotifier=ValueNotifier([]);
 ValueNotifier<List<songsmodel>>playlistsongnotifier=ValueNotifier([]);
 
 ValueNotifier<List<playlistmodel>>playlistnamenotifier=ValueNotifier([]);
+
+ValueNotifier<bool>  isSongPlayingNotifier=ValueNotifier(false);

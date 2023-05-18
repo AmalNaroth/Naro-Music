@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_datetime_picker: ^1.5.1
+  flutter_markdown: ^0.6.14
   flutter_neumorphic: ^3.2.0
   get: ^4.6.5
   google_fonts: ^4.0.3
@@ -78,6 +79,9 @@ flutter:
     - assets/image2/image0.jpg
     - assets/image2/image1.jpg
     - assets/image2/image2.jpg
+    - assets/image2/miniplayerbg.jpg
+    - assets/privacypolicy/privacy_policy.md
+    - assets/privacypolicy/terms_and_conditions.md
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

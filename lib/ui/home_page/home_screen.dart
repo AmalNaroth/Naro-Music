@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -9,6 +9,7 @@ import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
 import 'package:naromusic/ui/bottom_navbarroot/drawer.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
+import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
 import 'package:naromusic/widgets/allwidget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -124,7 +125,10 @@ class _homescreenState extends State<homescreen> {
                                           (BuildContext context, int index) {
                                         final data = playlistname[index];
                                         return InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.of(context).push(MaterialPageRoute(builder:(context) => PlayListSongListing(data: data),
+                                            ));
+                                          },
                                           child: Neumorphic(
                                             margin: EdgeInsets.all(10),
                                             padding: EdgeInsets.symmetric(

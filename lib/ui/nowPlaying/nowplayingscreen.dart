@@ -9,6 +9,8 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../music_lyrics/musicLyrics.dart';
+
 class nowplayingscreen extends StatefulWidget {
   nowplayingscreen({super.key, required this.data});
 
@@ -49,8 +51,55 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                       SizedBox(
                         height: 60,
                         width: 60,
-                        child: NeuBox(child: Icon(Icons.menu)),
-                      )
+                        child: NeuBox(child:
+                          IconButton(onPressed: () {
+            lyricsBottom(context,audioPlayer.getCurrentAudioTitle,audioPlayer.getCurrentAudioArtist);
+          }, icon: Icon(Icons.lyrics_outlined))
+                          // PopupMenuButton(
+                          //             color: Colors.white,
+                          //             itemBuilder: (context) => [
+                          //                   PopupMenuItem(
+                          //                       child: Row(
+                          //                     mainAxisAlignment:
+                          //                         MainAxisAlignment
+                          //                             .spaceBetween,
+                          //                     children: [
+                          //                       Text('Delete Playlist'),
+                          //                       IconButton(
+                          //                           onPressed: () {
+                          //                             // deletePlaylist(indx,
+                          //                             //     playlistList[indx]);
+                          //                             // Navigator.pop(context);
+                          //                           },
+                          //                           icon: Icon(Icons.delete)),
+                          //                     ],
+                          //                   )),
+                          //                   PopupMenuItem(
+                          //                       child: Row(
+                          //                     mainAxisAlignment:
+                          //                         MainAxisAlignment
+                          //                             .spaceBetween,
+                          //                     children: [
+                          //                       Text('Change name'),
+                          //                       IconButton(
+                          //                           onPressed: () {
+                          //                             // Navigator.push(context,
+                          //                             //     MaterialPageRoute(
+                          //                             //         builder: (cntx) {
+                          //                             //   return PlaylistRename(
+                          //                             //     index: indx,
+                          //                             //     playlistItem:
+                          //                             //         playlistList[
+                          //                             //             indx],
+                          //                             //   );
+                          //                             // }));
+                          //                           },
+                          //                           icon: Icon(Icons.edit))
+                          //                     ],
+                          //                   ))
+                          //                 ])
+                                          ),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -171,20 +220,25 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: NeuBox(
-                                  child: IconButton(
+                                  child: PlayerBuilder.isPlaying(player: audioPlayer
+                                  , builder: (context, isPlaying) {
+                                    return IconButton(
                                       onPressed: () {
-                                        setState(() {
-                                      if (playstate == false) {
-                                        playstate = true;
+                                       
+                                      if (isPlaying == false) {
+                                        audioPlayer.play();
                                       } else {
-                                        playstate = false;
-                                      }});
-                                      audioPlayer.playOrPause();
+                                        audioPlayer.pause();
+                                      }
+                                     
+                                      
                                       },
-                                        icon: playstate == false
+                                        icon: isPlaying == false
                                       ? Icon(Icons.play_arrow,size: 32,)
-                                      : Icon(Icons.pause, size: 32,))
-                                      ))),
+                                      : Icon(Icons.pause, size: 32,));
+                                  },)
+                                      ))
+                                      ),
                         Expanded(
                             child: NeuBox(
                                 child: IconButton(
@@ -211,18 +265,7 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                         NeuBox(
                           child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Text('''Road shimmer wigglin' the vision
-                        Heat, heat waves, I'm swimmin' in a mirror
-                        Road shimmer wigglin' the vision
-                        Heat, heat waves, I'm swimmin' in a
-                        Sometimes, all I think about is you
-                        Late nights in the middle of June
-                        Heat waves been fakin' me out
-                        Can't make you happier now
-                        Sometimes, all I think about is you
-                        Late nights in the middle of June
-                        Heat waves been fakin' me out
-                        Can't make you happier now''',textAlign: TextAlign.start,),
+                          //child:
                         )),
                   ),
                   SizedBox(

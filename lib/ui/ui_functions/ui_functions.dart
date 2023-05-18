@@ -1,5 +1,6 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/models/songsmodel.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 
 void findsong(int id){
@@ -13,3 +14,16 @@ void findsong(int id){
 }
 
 
+songsmodel findsongwithid(int songid){
+  late songsmodel data;
+  for(var element in allSongListNotifier.value){
+    
+    if(songid == element.id){
+     
+    data =  element;
+    }
+  }
+
+  return data;
+  
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:on_audio_query/on_audio_query.dart';

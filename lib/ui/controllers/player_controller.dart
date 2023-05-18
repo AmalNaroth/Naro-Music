@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
@@ -37,6 +38,9 @@ checkpermission() async{
   List <Audio> audio=[];
   
 playsongs(index,List songlist){
+  // bool isPlaying=true;
+  // isSongPlayingNotifier.value=isPlaying;
+  // isSongPlayingNotifier.notifyListeners();
   audio.clear();
   for(var elements in songlist){
     audio.add(Audio.file(elements.uri,metas: Metas(id: elements.id.toString(),

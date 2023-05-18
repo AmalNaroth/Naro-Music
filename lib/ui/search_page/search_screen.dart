@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
@@ -46,21 +46,24 @@ class _search_screenState extends State<search_screen> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Container(
-                    width: 300,
-                    child: Padding(padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: TextFormField(decoration: InputDecoration(
-                      fillColor: Colors.grey[300],
-                      labelText: "What do you want to listen to ?",
-                      border: InputBorder.none,
-                      filled: true,
-                    ),
-                    controller: _searchController,
-              cursorColor: Colors.grey,
-              onChanged:(value) {
-                songsearch(value);
-              },
-                    ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      width: 300,
+                      child: Padding(padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: TextFormField(decoration: InputDecoration(
+                        fillColor: Colors.grey[300],
+                        labelText: "What do you want to listen to ?",
+                        border: InputBorder.none,
+                        filled: true,
+                      ),
+                      controller: _searchController,
+                                cursorColor: Colors.grey,
+                                onChanged:(value) {
+                                  songsearch(value);
+                                },
+                      ),
+                      ),
                     ),
                   ),
                   Icon(Icons.search,color: Colors.black26,)

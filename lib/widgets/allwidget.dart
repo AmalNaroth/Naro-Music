@@ -1,9 +1,10 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/controllers/player_controller.dart';
+import 'package:naromusic/ui/mini_player/miniPlayer.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/ui/favourite_songs/favourite_songs_list.dart';
 import 'package:naromusic/ui/most_played/mostplayed_songs_list.dart';
@@ -79,11 +80,12 @@ class _songlistbarState extends State<songlistbar> {
       ),
       onTap: () {
         playsongs(widget.index, allSongListNotifier.value);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => nowplayingscreen(data: widget.data),
-            ));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => nowplayingscreen(data: widget.data),
+        //     ));
+        MiniPlayer();
       },
     );
   }
@@ -103,6 +105,8 @@ class recentlyplayedandmostplayed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),),
       leading: QueryArtworkWidget(
         id: data.id,
         type: ArtworkType.AUDIO,
@@ -303,7 +307,46 @@ class PlayListListing extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        playlistdelete(data, context);
+                        //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Areyou sure you want to delete")));
+                        showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.grey.withOpacity(0.8),
+            Colors.white.withOpacity(0.8),
+            Colors.grey.withOpacity(0.8),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: AlertDialog(
+      title: Text('Alert'),
+      content: Text('Are you sure you want to delete'),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text('Cancel'),
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the alert dialog
+          },
+        ),
+        ElevatedButton(
+          child: Text('OK'),
+          onPressed: () {
+            // Perform an action
+            Navigator.of(context).pop();
+            playlistdelete(data, context);
+          },
+        ),
+      ],
+    )
+    );
+  },
+);
+//
                       },
                       child: Neumorphic(
                         style: NeumorphicStyle(

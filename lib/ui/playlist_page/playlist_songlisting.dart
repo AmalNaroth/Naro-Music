@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:naromusic/db/db_List/songNotifierList.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -97,7 +97,44 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
                    tileColor: Color.fromARGB(0, 136, 136, 136).withOpacity(0.3),
                    trailing:  IconButton(
                            onPressed: () {
-                            songsdeletefromplaylist(data, widget.data.playlistname);
+                            showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.grey.withOpacity(0.8),
+            Colors.white.withOpacity(0.8),
+            Colors.grey.withOpacity(0.8),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: AlertDialog(
+      title: Text('Alert'),
+      content: Text('Are you sure you want to delete'),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text('Cancel'),
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the alert dialog
+          },
+        ),
+        ElevatedButton(
+          child: Text('OK'),
+          onPressed: () {
+            // Perform an action
+            Navigator.of(context).pop();
+            songsdeletefromplaylist(data, widget.data.playlistname);
+          },
+        ),
+      ],
+    )
+    );
+  },
+);
                            },
                            icon: Icon(Icons.delete)),
                    onTap: () {

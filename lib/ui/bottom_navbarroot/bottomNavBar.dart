@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
+import 'package:naromusic/ui/mini_player/miniPlayer.dart';
 import 'package:naromusic/ui/playlist_page/playlist_listing.dart';
 import 'package:naromusic/ui/search_page/search_screen.dart';
 import 'package:naromusic/ui/settings_page/settings_screen.dart';
@@ -26,39 +28,51 @@ class _mainscreenState extends State<mainscreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: routes[index],
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
-          child: GNav(
-            gap: 8,
-            backgroundColor: Colors.transparent,
-            color: Color.fromARGB(255, 158, 155, 155),
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade800,
-            padding: EdgeInsets.all(16),
-            onTabChange: (value) => setState(() {
-              index=value;
-            }),
-            tabs: [
-            GButton(
-              icon: Icons.home,
-              text: "Home",
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+           ValueListenableBuilder(
+              valueListenable: isSongPlayingNotifier,
+              builder: (BuildContext contx, isPlay, Widget? child) {
+                return isPlay ? MiniPlayer() : const SizedBox();
+              }),
+
+          Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+              child: GNav(
+                gap: 8,
+                backgroundColor: Colors.transparent,
+                color: Color.fromARGB(255, 158, 155, 155),
+                activeColor: Colors.white,
+                tabBackgroundColor: Colors.grey.shade800,
+                padding: EdgeInsets.all(16),
+                onTabChange: (value) => setState(() {
+                  index=value;
+                }),
+                tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: "Home",
+                ),
+                GButton(
+                  icon: Icons.list,
+                  text: "Play List",
+                ),
+                GButton(
+                  icon: Icons.search,
+                  text: "Search",
+                ),
+                GButton(
+                  icon: Icons.settings,
+                  text: "Settings",
+                ),
+              ]),
             ),
-            GButton(
-              icon: Icons.list,
-              text: "Play List",
-            ),
-            GButton(
-              icon: Icons.search,
-              text: "Search",
-            ),
-            GButton(
-              icon: Icons.settings,
-              text: "Settings",
-            ),
-          ]),
-        ),
+          ),
+        ],
       ),
     );
   }
