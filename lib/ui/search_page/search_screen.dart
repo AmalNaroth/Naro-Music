@@ -89,7 +89,7 @@ class _search_screenState extends State<search_screen> {
         id:data.id,
         type: ArtworkType.AUDIO,
         nullArtworkWidget: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/Naro logo.png'),
+          backgroundImage: AssetImage('assets/image2/narolistlogo.png'),
         ),
       ),
       title: TextScroll(

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:naromusic/ui/showdialogs/privacy_dialoge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class drawerlist extends StatefulWidget {
   drawerlist({super.key});
@@ -26,10 +27,10 @@ class _drawerlistState extends State<drawerlist> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(accountName: Text((savedName==null)?savedName.toString():"UserName"), accountEmail: Text("Amalzenox@129"),
+          UserAccountsDrawerHeader(accountName: Text((savedName!=null)?savedName.toString():"Hello User",style: TextStyle(fontSize: 20,color: Colors.white),), accountEmail: TextScroll("Experience the power of music like never before with",style: TextStyle(fontSize: 15,color: Colors.white)),
           currentAccountPicture: CircleAvatar(
-            backgroundColor: Colors.grey,
-            backgroundImage: AssetImage("assets/images/dq.jpg"),
+            backgroundColor: Color.fromARGB(255, 255, 255, 255),
+            child: Text("UR",style: TextStyle(fontSize: 30),),
           ),
           decoration: BoxDecoration(
             color: Colors.grey,

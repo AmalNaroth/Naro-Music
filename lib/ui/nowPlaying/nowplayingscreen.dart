@@ -6,7 +6,6 @@ import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/ui_functions/ui_functions.dart';
 import 'package:naromusic/widgets/allwidget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../music_lyrics/musicLyrics.dart';
@@ -59,7 +58,7 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                         width: 60,
                         child: NeuBox(child:
                           IconButton(onPressed: () {
-            lyricsBottom(context,audioPlayer.getCurrentAudioTitle,audioPlayer.getCurrentAudioArtist);
+           // lyricsBottom(context,audioPlayer.getCurrentAudioTitle,audioPlayer.getCurrentAudioArtist);
           }, icon: Icon(Icons.lyrics_outlined))
                           // PopupMenuButton(
                           //             color: Colors.white,

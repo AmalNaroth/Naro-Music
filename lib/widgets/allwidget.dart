@@ -10,7 +10,6 @@ import 'package:naromusic/ui/mini_player/miniPlayer.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/ui/favourite_songs/favourite_songs_list.dart';
 import 'package:naromusic/ui/most_played/mostplayed_songs_list.dart';
-import 'package:naromusic/ui/playlist_page/playlist_listing.dart';
 import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
 import 'package:naromusic/ui/recently_played/recently_played_list.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -46,7 +45,7 @@ class _songlistbarState extends State<songlistbar> {
         id: widget.data.id,
         type: ArtworkType.AUDIO,
         nullArtworkWidget: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/Naro logo.png'),
+          backgroundImage: AssetImage('assets/image2/narolistlogo.png'),
         ),
       ),
       title: TextScroll(
@@ -113,7 +112,7 @@ class recentlyplayedandmostplayed extends StatelessWidget {
         id: data.id,
         type: ArtworkType.AUDIO,
         nullArtworkWidget: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/Naro logo.png'),
+          backgroundImage: AssetImage('assets/image2/narolistlogo.png'),
           radius: 25,
         ),
       ),
@@ -474,11 +473,13 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
                                   child: ListTile(
                                     leading: CircleAvatar(
                                       backgroundImage: AssetImage(
-                                          'assets/images/Naro logo.png'),
+                                          'assets/image2/narolistlogo.png'),
                                     ),
                                     title: TextScroll(
                                       data.playlistname,
                                       style: TextStyle(
+                                        fontSize: 20,
+                                        overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     tileColor: Color.fromARGB(0, 136, 136, 136)
@@ -548,7 +549,7 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
                           type: ArtworkType.AUDIO,
                           nullArtworkWidget: CircleAvatar(
                             backgroundImage:
-                                AssetImage('assets/images/Naro logo.png'),
+                                AssetImage('assets/image2/narolistlogo.png'),
                           ),
                         ),
                         title: TextScroll(
@@ -599,54 +600,59 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
         ),
       ),
       child: AlertDialog(
-        title: Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              spreadRadius: 2)
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Form(
-                          key: _formkey,
-                          child: Container(
-                            width: 100,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    labelText: "Enter the playlist name",
-                                    labelStyle: TextStyle(color: Colors.black26),
-                                    border: InputBorder.none),
-                                controller: _playlisttexcontroller,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Please enter the playlist name";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Icon(
-                          Icons.add,
-                          color: Colors.black26,
-                        )
-                      ],
-                    ),
+        title:Padding(
+  padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Form(
+            key: _formkey,
+            child: Container(
+              width: 100,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Enter playlist name',
+                    labelStyle: TextStyle(color: Colors.black26),
+                    border: InputBorder.none,
                   ),
-                )),
+                  controller: _playlisttexcontroller,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the playlist name';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+          ),
+          Icon(
+            Icons.add,
+            color: Colors.black26,
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
         actions: [
           InkWell(
               onTap:() {

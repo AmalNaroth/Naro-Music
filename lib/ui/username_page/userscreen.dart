@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
+import 'package:naromusic/widgets/allwidget.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class userscreen extends StatefulWidget {
@@ -24,17 +25,17 @@ class _userscreenState extends State<userscreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.grey,
-            Colors.black
+            Color.fromARGB(255, 255, 255, 255),
+            Color.fromARGB(255, 255, 255, 255)
           ]
         ),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false, 
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(0, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text("Naro Music"),
+        backgroundColor: Color.fromARGB(0, 255, 255, 255),
+        title: Text("N A R O M U S I C"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -53,6 +54,8 @@ class _userscreenState extends State<userscreen> {
                 child: TextFormField(
                   controller: _usernamecontroller,
                   decoration: InputDecoration(
+                    focusColor: Colors.grey,
+                    fillColor: Colors.grey,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50)
                     ),
@@ -71,7 +74,7 @@ class _userscreenState extends State<userscreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 90.0),
               child: SlideAction(
-                outerColor: Colors.black,
+                outerColor: Color.fromARGB(255, 227, 227, 227),
                 onSubmit: () {
                   if(_formkey.currentState!.validate()){
                      widget.onAddUserName(_usernamecontroller.text);
@@ -79,13 +82,13 @@ class _userscreenState extends State<userscreen> {
                   }
                 },
                 text: "Start",
-              ),
+              )
             ),
             SizedBox(height: 10,),
             TextButton(onPressed: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => mainscreen(),));
             }, child: Text("Skip",style: TextStyle(
-              color: Colors.white,
+              color: Color.fromARGB(255, 0, 0, 0),
               fontSize: 18
             ),))
           ],

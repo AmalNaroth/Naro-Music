@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/ui/ui_functions/ui_functions.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 class MiniPlayer extends StatefulWidget {
@@ -21,8 +22,9 @@ class _MiniPlayerState extends State<MiniPlayer> {
   Widget build(BuildContext context) {
     return audioPlayer.builderCurrent(builder: (cntx, playing) {
       // resentPlyed(int.parse(playing.audio.audio.metas.id!));
-
       // mostPlayAdd(int.parse(playing.audio.audio.metas.id!));
+      int songid = int.parse(playing.audio.audio.metas.id!);
+        findsong(songid);
       return GestureDetector(
           onTap: () {
             final data = findsongwithid(int.parse(playing.audio.audio.metas.id.toString()));
@@ -54,13 +56,11 @@ class _MiniPlayerState extends State<MiniPlayer> {
                       child: CircleAvatar(
                         radius: 40,
                         backgroundColor: Colors.black,
-                        // child: QueryArtworkWidget(
-                        //   id: int.parse(playing.audio.audio.metas.id!),
-                        //   type: ArtworkType.AUDIO,
-                        //   nullArtworkWidget: Image.asset(
-                        //    ""
-                        //   ),
-                        // ),
+                        child: QueryArtworkWidget(
+                          id: int.parse(playing.audio.audio.metas.id!),
+                          type: ArtworkType.AUDIO,
+                          nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage("assets/image2/narolistlogo.png"),),
+                        ),
                       ),
                     ),
                     title: Row(
@@ -70,7 +70,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                             playing.audio.audio.metas.title!,
                             velocity: Velocity(pixelsPerSecond: Offset(50, 0)),
                             pauseBetween: Duration(milliseconds: 1000),
-                            //style: songNameText,
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ],
@@ -78,6 +78,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                     // subtitle: Text('artist'),
                     subtitle: Wrap(
                       children: [
+                        SizedBox(width: 35,),
                         IconButton(
                             onPressed: () {
                               audioPlayer.previous();

@@ -4,10 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
-import 'package:naromusic/ui/controllers/player_controller.dart';
-import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/widgets/allwidget.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class mostplayedlistScreen extends StatefulWidget {
   const mostplayedlistScreen({super.key});
@@ -116,7 +113,7 @@ class _mostplayedlistScreenState extends State<mostplayedlistScreen> {
                             intensity: 1),
                         child: Padding(
                           padding: EdgeInsets.all(10),
-                          child: Icon(CupertinoIcons.music_albums),
+                          child: Icon(Icons.sports_volleyball_outlined),
                         ),
                       ),
                     )

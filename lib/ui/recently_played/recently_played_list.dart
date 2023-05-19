@@ -90,7 +90,7 @@ class _recentlylistscreenState extends State<recentlylistscreen> {
                             intensity: 1),
                         child: Padding(
                           padding: EdgeInsets.all(10),
-                          child: Icon(CupertinoIcons.music_albums),
+                          child: Icon(Icons.local_play_rounded),
                         ),
                       ),
                     )

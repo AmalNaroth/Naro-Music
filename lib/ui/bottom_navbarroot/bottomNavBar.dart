@@ -67,7 +67,7 @@ class _mainscreenState extends State<mainscreen> {
                 ),
                 GButton(
                   icon: Icons.settings,
-                  text: "Settings",
+                  text: "Premium",
                 ),
               ]),
             ),

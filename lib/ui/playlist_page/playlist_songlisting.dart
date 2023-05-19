@@ -61,7 +61,7 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
                             intensity: 1),
                         child: Padding(
                           padding: EdgeInsets.all(10),
-                          child: Icon(CupertinoIcons.music_albums),
+                          child: Icon(CupertinoIcons.add),
                         ),
                       ),
                     )
@@ -90,7 +90,7 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
                 margin: EdgeInsets.only(bottom: 5),
                 child: ListTile(
                   leading: QueryArtworkWidget(id: data.id, type:ArtworkType.AUDIO,
-                   nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/images/Naro logo.png'),),
+                   nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/image2/narolistlogo.png'),),
                    ),
                    title: Text(data.songName,overflow: TextOverflow.ellipsis,),
                    subtitle: Text(data.artistName,overflow: TextOverflow.ellipsis,),
