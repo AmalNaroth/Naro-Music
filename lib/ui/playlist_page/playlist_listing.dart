@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
-import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/widgets/allwidget.dart';
 
 class playlist_screen extends StatefulWidget {
@@ -37,10 +37,9 @@ class _playlist_screenState extends State<playlist_screen> {
                     ),
                     Text(
                       "P L A Y L I S T",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                      style:GoogleFonts.bebasNeue(fontSize: 30,
+                               fontWeight: FontWeight.w500,
+                                color: Colors.black54),
                     ),
                     InkWell(
                       onTap: () {
@@ -51,7 +50,7 @@ class _playlist_screenState extends State<playlist_screen> {
                             shape: NeumorphicShape.flat,
                             boxShape: NeumorphicBoxShape.roundRect(
                                 BorderRadius.circular(12)),
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 227, 227, 227),
                             intensity: 1),
                         child: Padding(
                           padding: EdgeInsets.all(10),

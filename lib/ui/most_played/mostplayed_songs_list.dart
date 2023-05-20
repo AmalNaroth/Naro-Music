@@ -97,8 +97,9 @@ class _mostplayedlistScreenState extends State<mostplayedlistScreen> {
                     Text(
                       "Most played",
                       style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          //fontWeight: FontWeight.bold,
+                          fontFamily: "BebasNeue-Regular",
                           color: Colors.black54),
                     ),
                     InkWell(

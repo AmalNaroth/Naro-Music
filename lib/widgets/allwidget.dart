@@ -50,6 +50,7 @@ class _songlistbarState extends State<songlistbar> {
       ),
       title: TextScroll(
         widget.data.songName,
+        style: TextStyle(fontFamily: ""),
       ),
       subtitle: Text(
         widget.data.artistName,
@@ -224,9 +225,10 @@ class _ProductWidgetsState extends State<ProductWidgets> {
                         child: Text(
                           containername[index],
                           style: TextStyle(
+                            fontFamily: "FiraSansCondensed-Medium",
                               color: Colors.black87,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                              //fontWeight: FontWeight.bold,
+                              fontSize: 17),
                         ),
                       ),
                     ),
@@ -289,9 +291,10 @@ class PlayListListing extends StatelessWidget {
                           Text(
                             data.playlistname,
                             style: TextStyle(
+                              fontFamily: "FiraSansCondensed-Medium",
                               overflow: TextOverflow.ellipsis,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 30,
+                              //fontWeight: FontWeight.w500,
                               color: Colors.black45,
                             ),
                           ),
@@ -299,6 +302,7 @@ class PlayListListing extends StatelessWidget {
                           Text(
                             "Songs count",
                             style: TextStyle(
+                              fontFamily: "FiraSansCondensed-Medium",
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
@@ -306,64 +310,105 @@ class PlayListListing extends StatelessWidget {
                         ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Areyou sure you want to delete")));
-                        showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey.withOpacity(0.8),
-            Colors.white.withOpacity(0.8),
-            Colors.grey.withOpacity(0.8),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: AlertDialog(
-      title: Text('Alert'),
-      content: Text('Are you sure you want to delete'),
-      actions: <Widget>[
-        ElevatedButton(
-          child: Text('Cancel'),
-          onPressed: () {
-            Navigator.of(context).pop(); // Close the alert dialog
-          },
-        ),
-        ElevatedButton(
-          child: Text('OK'),
-          onPressed: () {
-            // Perform an action
-            Navigator.of(context).pop();
-            playlistdelete(data, context);
-          },
-        ),
-      ],
-    )
-    );
-  },
-);
-//
-                      },
-                      child: Neumorphic(
-                        style: NeumorphicStyle(
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(12),
+//                     InkWell(
+//                       onTap: () {
+//                         //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Areyou sure you want to delete")));
+//                         showDialog(
+//   context: context,
+//   builder: (BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         gradient: LinearGradient(
+//           colors: [
+//             Colors.grey.withOpacity(0.8),
+//             Colors.white.withOpacity(0.8),
+//             Colors.grey.withOpacity(0.8),
+//           ],
+//           begin: Alignment.topCenter,
+//           end: Alignment.bottomCenter,
+//         ),
+//       ),
+//       child: AlertDialog(
+//       title: Text('Alert'),
+//       content: Text('Are you sure you want to delete'),
+//       actions: <Widget>[
+//         ElevatedButton(
+//           child: Text('Cancel'),
+//           onPressed: () {
+//             Navigator.of(context).pop(); // Close the alert dialog
+//           },
+//         ),
+//         ElevatedButton(
+//           child: Text('OK'),
+//           onPressed: () {
+//             // Perform an action
+//             Navigator.of(context).pop();
+//             playlistdelete(data, context);
+//           },
+//         ),
+//       ],
+//     )
+//     );
+//   },
+// );
+// //
+//                       },
+                       InkWell(
+                        onTap: () {
+                           // playlistdelete(data, context);
+                        },
+                         child: Neumorphic(
+                          style: NeumorphicStyle(
+                            shape: NeumorphicShape.flat,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.circular(12),
+                            ),
+                            intensity: 1,
+                            color: Color.fromARGB(255, 217, 217, 217),
                           ),
-                          intensity: 1,
-                          color: Color.fromARGB(255, 217, 217, 217),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Icon(Icons.delete),
-                        ),
-                      ),
-                    ),
+                          // child: Padding(
+                          //   padding: EdgeInsets.all(10),
+                          //   child: Icon(Icons.delete),
+                          // ),
+                          child: PopupMenuButton(
+                                      color: Colors.white,
+                                      itemBuilder: (context) => [
+                                            PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                    playlistdelete(data, context);
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                  Text('Delete Playlist'),
+                                                  Icon(Icons.delete)
+                                                    ],
+                                                    ),
+                                                )),
+                                            PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                     Navigator.of(context).pop();
+                                                   final obj2= playlistnameupdate(context,index);
+                                                   obj2.createnewolayList(context);
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                  Text('Change name'),
+                                                  Icon(Icons.edit)
+                                                        ],
+                                                          ),
+                                                ))
+                                          ]),
+                                             ),
+                       ),
                   ],
                 ),
               ],
@@ -436,7 +481,8 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
           Text(
             'P L A Y L I S T',
             style: TextStyle(
-                fontSize: 23,
+              fontFamily: "BebasNeue-Regular",
+                fontSize: 30,
                 color: Colors.black45,
                 fontWeight: FontWeight.w500),
           ),
@@ -485,6 +531,7 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
                                     tileColor: Color.fromARGB(0, 136, 136, 136)
                                         .withOpacity(0.3),
                                     onTap: () {
+                                      Navigator.of(context).pop();
                                       songaddtoplaylistdatabase(
                                           data.playlistname, songdata, context);
                                     },
@@ -526,7 +573,9 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Text(
               'A L L S O N G L I S T',
-              style: TextStyle(fontSize: 25, color: Colors.black45),
+              style: TextStyle(fontSize: 30, color: Colors.black45,
+              fontFamily: "BebasNeue-Regular"
+              ),
             ),
           ),
           Expanded(
@@ -576,123 +625,41 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
   );
 }
 
-
+//create new playlist popup
  class createnewplaylist{
   createnewplaylist(this.context);
   BuildContext context;
   final _formkey=GlobalKey<FormState>();
     final _playlisttexcontroller = TextEditingController();
    void createnewolayList(BuildContext context,){
-
-    showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.grey.withOpacity(0.8),
-            Colors.white.withOpacity(0.8),
-            Colors.grey.withOpacity(0.8),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: AlertDialog(
-        title:Padding(
-  padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
-  child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-            spreadRadius: 2,
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Playlist cration",style: TextStyle(fontFamily: "BebasNeue-Regular",fontSize: 25),),
+      content: Form(
+        key: _formkey,
+        child: TextFormField(
+          decoration: InputDecoration(
+            label: Text("Enter your playlist name")
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Form(
-            key: _formkey,
-            child: Container(
-              width: 100,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Enter playlist name',
-                    labelStyle: TextStyle(color: Colors.black26),
-                    border: InputBorder.none,
-                  ),
-                  controller: _playlisttexcontroller,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
+          controller: _playlisttexcontroller,
+          validator: (value) {
+             if (value == null || value.isEmpty) {
                       return 'Please enter the playlist name';
                     }
-                    return null;
-                  },
-                ),
-              ),
-            ),
-          ),
-          Icon(
-            Icons.add,
-            color: Colors.black26,
-          ),
-        ],
+          },
+        ),
       ),
-    ),
-  ),
-),
-
-        actions: [
-          InkWell(
-              onTap:() {
-                 if(_formkey.currentState!.validate()){
+      actions: [
+        TextButton(onPressed: (){
+           if(_formkey.currentState!.validate()){
                   _submitForm();
+                  _playlisttexcontroller.clear();
                  }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Neumorphic(
-                    style: NeumorphicStyle(
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                        BorderRadius.circular(20),
-                      ),
-                      color: Colors.white,
-                      intensity: 1,
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Create",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  },
-);
+        }, child: Text("Create",style: TextStyle(color: Colors.black),)),
+        TextButton(onPressed: (){
+          Navigator.of(context).pop();
+        }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
+      ],
+    ),);
   }
   void _submitForm() {
     final textValue = _playlisttexcontroller.text;
@@ -771,3 +738,50 @@ class _musicslidersState extends State<musicsliders> {
   },);
   }
 }
+
+
+//playlist nameupdating
+class playlistnameupdate{
+  playlistnameupdate(this.context,this.index);
+  BuildContext context;
+  int index;
+
+  final _formkey=GlobalKey<FormState>();
+    final _playlisttexcontroller = TextEditingController();
+   void createnewolayList(BuildContext context,){
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Playlist cration",style: TextStyle(fontFamily: "BebasNeue-Regular",fontSize: 25),),
+      content: Form(
+        key: _formkey,
+        child: TextFormField(
+          decoration: InputDecoration(
+            label: Text("Enter your new playlist name")
+          ),
+          controller: _playlisttexcontroller,
+          validator: (value) {
+             if (value == null || value.isEmpty) {
+                      return 'Please enter the playlist name';
+                    }
+          },
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: (){
+           if(_formkey.currentState!.validate()){
+                  _submitForm();
+                 }
+        }, child: Text("Create",style: TextStyle(color: Colors.black),)),
+        TextButton(onPressed: (){
+          Navigator.of(context).pop();
+        }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
+      ],
+    ),);
+  }
+  void _submitForm() {
+    final textValue = _playlisttexcontroller.text;
+    print('textcontroller = ${textValue}');
+    List<songsmodel> listarray = [];
+    playlistrename(textValue, listarray, context, index);
+    Navigator.pop(context);
+  }
+ }

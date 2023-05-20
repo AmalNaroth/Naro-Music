@@ -5,7 +5,6 @@ import 'package:naromusic/ui/home_page/home_screen.dart';
 import 'package:naromusic/ui/mini_player/miniPlayer.dart';
 import 'package:naromusic/ui/playlist_page/playlist_listing.dart';
 import 'package:naromusic/ui/search_page/search_screen.dart';
-import 'package:naromusic/ui/settings_page/settings_screen.dart';
 
 
 class mainscreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _mainscreenState extends State<mainscreen> {
       homescreen(),
       playlist_screen(),
       search_screen(),
-      settings_screen()
+      //settings_screen()
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -65,10 +64,10 @@ class _mainscreenState extends State<mainscreen> {
                   icon: Icons.search,
                   text: "Search",
                 ),
-                GButton(
-                  icon: Icons.settings,
-                  text: "Premium",
-                ),
+                // GButton(
+                //   icon: Icons.settings,
+                //   text: "Premium",
+                // ),
               ]),
             ),
           ),

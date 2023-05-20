@@ -33,8 +33,8 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
       builder: (context, playing) {
         int songid = int.parse(playing.audio.audio.metas.id!);
         findsong(songid);
-        songsmodel sondata = findsongwithid(songid);
-        bool ischeck= favouritecheckings(sondata);
+        songsmodel songdata = findsongwithid(songid);
+        bool ischeck= favouritecheckings(songdata);
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: SafeArea(
@@ -52,57 +52,37 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                           Navigator.of(context).pop();
                         }, icon: Icon(Icons.arrow_drop_down)),),
                       ),
-                      Text("N A R O M U S I C"),
+                      Text("N A R O M U S I C",
+                      style: TextStyle(fontFamily:"BebasNeue-Regular",
+                      fontSize: 30,
+                      color: Colors.black54
+                      ),
+                      ),
                       SizedBox(
                         height: 60,
                         width: 60,
                         child: NeuBox(child:
-                          IconButton(onPressed: () {
-           // lyricsBottom(context,audioPlayer.getCurrentAudioTitle,audioPlayer.getCurrentAudioArtist);
-          }, icon: Icon(Icons.lyrics_outlined))
-                          // PopupMenuButton(
-                          //             color: Colors.white,
-                          //             itemBuilder: (context) => [
-                          //                   PopupMenuItem(
-                          //                       child: Row(
-                          //                     mainAxisAlignment:
-                          //                         MainAxisAlignment
-                          //                             .spaceBetween,
-                          //                     children: [
-                          //                       Text('Delete Playlist'),
-                          //                       IconButton(
-                          //                           onPressed: () {
-                          //                             // deletePlaylist(indx,
-                          //                             //     playlistList[indx]);
-                          //                             // Navigator.pop(context);
-                          //                           },
-                          //                           icon: Icon(Icons.delete)),
-                          //                     ],
-                          //                   )),
-                          //                   PopupMenuItem(
-                          //                       child: Row(
-                          //                     mainAxisAlignment:
-                          //                         MainAxisAlignment
-                          //                             .spaceBetween,
-                          //                     children: [
-                          //                       Text('Change name'),
-                          //                       IconButton(
-                          //                           onPressed: () {
-                          //                             // Navigator.push(context,
-                          //                             //     MaterialPageRoute(
-                          //                             //         builder: (cntx) {
-                          //                             //   return PlaylistRename(
-                          //                             //     index: indx,
-                          //                             //     playlistItem:
-                          //                             //         playlistList[
-                          //                             //             indx],
-                          //                             //   );
-                          //                             // }));
-                          //                           },
-                          //                           icon: Icon(Icons.edit))
-                          //                     ],
-                          //                   ))
-                          //                 ])
+                          PopupMenuButton(
+                                      color: Colors.white,
+                                      itemBuilder: (context) => [
+                                            PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                         callingBottomSheet(context, songdata);
+                                                  },
+                                                  child: Row(
+                                                                                              mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                                                              children: [
+                                                  Text('Add to playlist'),
+                                                  Icon(Icons.add),
+                                                                                              ],
+                                                                                            ),
+                                                )),
+                                          ])
+                          
                                           ),
                       ),
                     ],
@@ -291,22 +271,6 @@ class _nowplayingscreenState extends State<nowplayingscreen> {
                                     ))))
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("L Y R I C S"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child:
-                        NeuBox(
-                          child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          //child:
-                        )),
                   ),
                   SizedBox(
                     height: 15,

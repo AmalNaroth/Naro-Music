@@ -101,8 +101,9 @@ class _favlistscreenState extends State<favlistscreen> {
                     Text(
                       "Favourite",
                       style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
+                        fontFamily: "BebasNeue-Regular",
+                          fontSize: 30,
+                          //fontWeight: FontWeight.bold,
                           color: Colors.black54),
                     ),
                     InkWell(

@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
@@ -8,6 +9,7 @@ import 'package:naromusic/db/models/songsmodel.dart';
 import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
 import 'package:naromusic/ui/bottom_navbarroot/drawer.dart';
 import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
+import 'package:naromusic/ui/search_page/search_screen.dart';
 import 'package:naromusic/widgets/allwidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -70,15 +72,20 @@ class homescreenState extends State<homescreen> {
                           ),
                           Text(
                             "N A R O M U S I C",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                            // style: TextStyle(
+                            //     fontSize: 20,
+                            //     fontWeight: FontWeight.w500,
+                            //     color: Colors.black54),
+                            style:GoogleFonts.bebasNeue(fontSize: 30,
+                               fontWeight: FontWeight.w500,
                                 color: Colors.black54),
                           ),
                           Padding(
                             padding: EdgeInsets.only(right: 20),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                //Navigator.of(context).push(MaterialPageRoute(builder: (context) => search_screen(),));
+                              },
                               child: Neumorphic(
                                 style: NeumorphicStyle(
                                     shape: NeumorphicShape.flat,
@@ -88,7 +95,7 @@ class homescreenState extends State<homescreen> {
                                     color: Color.fromARGB(255, 217, 217, 217)),
                                 child: Padding(
                                     padding: EdgeInsets.all(10),
-                                    child: Icon(Icons.search)),
+                                    child: Icon(Icons.headphones_outlined)),
                               ),
                             ),
                           ),
@@ -137,6 +144,7 @@ class homescreenState extends State<homescreen> {
                                                 child: Text(
                                               data.playlistname,
                                               style: TextStyle(
+                                                fontFamily: "FiraSansCondensed-Medium",
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500),
                                             )),
@@ -147,10 +155,7 @@ class homescreenState extends State<homescreen> {
                                   : Center(
                                       child: Text(
                                         "No Play List",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.bold),
+                                        style: GoogleFonts.beVietnamPro(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.grey.shade700)
                                       ),
                                     );
                             },
@@ -160,10 +165,15 @@ class homescreenState extends State<homescreen> {
                       ),
                       Text(
                         "Y O U R S O N G S",
+                        // style: GoogleFonts.aBeeZee(
+                        //     fontSize: 20,
+                        //     fontWeight: FontWeight.w500,
+                        //     color: Colors.black54),
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black54),
+                          fontFamily: "FiraSansCondensed-Medium",
+                          fontSize: 20,
+                          color: Colors.black54
+                        ),
                       ),
                       ValueListenableBuilder(
                           valueListenable: allSongListNotifier,

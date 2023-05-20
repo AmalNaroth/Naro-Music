@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
@@ -31,13 +32,16 @@ class _search_screenState extends State<search_screen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 50,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text("S E A R C H",style: TextStyle(
-              fontSize: 25,
-              //fontWeight: FontWeight.w500,
-              color: Colors.black54
-            ),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text("S E A R C H", style:GoogleFonts.bebasNeue(fontSize: 30,
+                                   fontWeight: FontWeight.w500,
+                                    color: Colors.black54),),
+              ),
+            ],
           ),
           SizedBox(height: 15,),
           Padding(
@@ -103,7 +107,7 @@ class _search_screenState extends State<search_screen> {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.list)),
+          IconButton(onPressed: () =>  callingBottomSheet(context, data), icon: Icon(Icons.list)),
           IconButton(
               onPressed: () {
                 setState(() {

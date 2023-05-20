@@ -17,7 +17,7 @@ class _splashscreenState extends State<splashscreen> {
   Future<void>addname()async{
     final SharedPreferences add=await SharedPreferences.getInstance();
     final addvalue=add.getString("Save_Name");
-    if(addvalue!=null){
+    if(addvalue!=null && addvalue.isNotEmpty){
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainscreen(),));
     }else{
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => userscreen(onAddUserName: namechecker,)));
@@ -25,9 +25,19 @@ class _splashscreenState extends State<splashscreen> {
   }
 
   //value adding to share preference
-  Future<void>namechecker(String username)async{
-    final Sharedprefs= await SharedPreferences.getInstance();
+  Future<void>namechecker(String username,String FirstChar,String LastChar)async{
+    if((username.isNotEmpty && username!=null)&&(FirstChar.isNotEmpty && LastChar!=null)&&(LastChar.isNotEmpty && LastChar!=null)){
+       final Sharedprefs= await SharedPreferences.getInstance();
     Sharedprefs.setString("Save_Name", username);
+    
+    //firstchar sharedpreference
+    final firstcharacter=await SharedPreferences.getInstance();
+    firstcharacter.setString("FirstChar",FirstChar);
+
+    //lastchar sharedpreference
+    final LastCharacter=await SharedPreferences.getInstance();
+    LastCharacter.setString("LastChar", LastChar);
+    }
   }
 
   @override

@@ -12,15 +12,29 @@ class drawerlist extends StatefulWidget {
 }
 
 class _drawerlistState extends State<drawerlist> {
+
   String? savedName;
+  String? firstchar;
+  String? LastChar;
   //sharedpreference
   Future<void> username() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPrefs1 = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPrefs2 = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPrefs3 = await SharedPreferences.getInstance();
     setState(() {
-      savedName = sharedPrefs.getString('Save_Name');
+      savedName = sharedPrefs1.getString('Save_Name');
+      print(savedName);
+      firstchar = sharedPrefs2.getString("FirstChar");
+      LastChar = sharedPrefs3.getString("LastChar");
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    username();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,7 +44,8 @@ class _drawerlistState extends State<drawerlist> {
           UserAccountsDrawerHeader(accountName: Text((savedName!=null)?savedName.toString():"Hello User",style: TextStyle(fontSize: 20,color: Colors.white),), accountEmail: TextScroll("Experience the power of music like never before with",style: TextStyle(fontSize: 15,color: Colors.white)),
           currentAccountPicture: CircleAvatar(
             backgroundColor: Color.fromARGB(255, 255, 255, 255),
-            child: Text("UR",style: TextStyle(fontSize: 30),),
+            child: savedName!=null ? Text("$firstchar$LastChar",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),):Text("UR",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500)),
+            //Text(,style: TextStyle(fontSize: 30),),
           ),
           decoration: BoxDecoration(
             color: Colors.grey,

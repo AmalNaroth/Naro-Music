@@ -44,7 +44,8 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
                     Text(
                       widget.data.playlistname,
                       style: TextStyle(
-                          fontSize: 20,
+                        fontFamily: "BebasNeue-Regular",
+                          fontSize: 30,
                           fontWeight: FontWeight.w500,
                           color: Colors.black54),
                     ),
@@ -57,7 +58,7 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
                             shape: NeumorphicShape.flat,
                             boxShape: NeumorphicBoxShape.roundRect(
                                 BorderRadius.circular(12)),
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 217, 217, 217),
                             intensity: 1),
                         child: Padding(
                           padding: EdgeInsets.all(10),
@@ -84,11 +85,13 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
               final data=playlistarrysongs[index];
               return Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 171, 170, 170),
+                  color: Color.fromARGB(255, 217, 217, 217),
                   borderRadius: BorderRadius.circular(15)
                 ),
                 margin: EdgeInsets.only(bottom: 5),
                 child: ListTile(
+                  shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12)),
                   leading: QueryArtworkWidget(id: data.id, type:ArtworkType.AUDIO,
                    nullArtworkWidget: CircleAvatar(backgroundImage: AssetImage('assets/image2/narolistlogo.png'),),
                    ),
