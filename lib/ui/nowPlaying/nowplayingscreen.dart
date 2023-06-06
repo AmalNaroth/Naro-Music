@@ -8,8 +8,6 @@ import 'package:naromusic/widgets/allwidget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import '../music_lyrics/musicLyrics.dart';
-
 bool isshuffle = false;
 bool isloop = false;
 

@@ -1,13 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
-import 'package:naromusic/ui/controllers/player_controller.dart';
-import 'package:naromusic/ui/nowPlaying/nowplayingscreen.dart';
 import 'package:naromusic/widgets/allwidget.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class recentlylistscreen extends StatefulWidget {
   const recentlylistscreen({super.key});

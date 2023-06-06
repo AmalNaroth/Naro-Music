@@ -17,7 +17,7 @@ class _playlist_screenState extends State<playlist_screen> {
   @override
   Widget build(BuildContext context) {
     addplaylistdbtovaluelistenable();
-    final obj=createnewplaylist(context);
+    final obj = createnewplaylist(context);
     return Material(
         color: Colors.white,
         child: SingleChildScrollView(
@@ -37,9 +37,10 @@ class _playlist_screenState extends State<playlist_screen> {
                     ),
                     Text(
                       "P L A Y L I S T",
-                      style:GoogleFonts.bebasNeue(fontSize: 30,
-                               fontWeight: FontWeight.w500,
-                                color: Colors.black54),
+                      style: GoogleFonts.bebasNeue(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black54),
                     ),
                     InkWell(
                       onTap: () {
@@ -65,44 +66,59 @@ class _playlist_screenState extends State<playlist_screen> {
                 valueListenable: playlistnamenotifier,
                 builder: (BuildContext context,
                     List<playlistmodel> playlistname, Widget? child) {
-                  return !playlistname.isEmpty ? GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding:
-                        EdgeInsets.only(top: 20, right: 5, left: 5, bottom: 50),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio:
-                            (MediaQuery.of(context).size.width - 15 - 10) /
-                                (2 * 250),
-                        mainAxisSpacing: 30,
-                        crossAxisSpacing: 5),
-                    itemCount: playlistname.length,
-                    itemBuilder: (context, index) {
-                      final data = playlistname[index];
-                      if (index % 2 == 0) {
-                        return PlayListListing(
-                          index: index,
-                          data: data,
+                  return !playlistname.isEmpty
+                      ? GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: EdgeInsets.only(
+                              top: 20, right: 5, left: 5, bottom: 50),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio:
+                                      (MediaQuery.of(context).size.width -
+                                              15 -
+                                              10) /
+                                          (2 * 250),
+                                  mainAxisSpacing: 30,
+                                  crossAxisSpacing: 5),
+                          itemCount: playlistname.length,
+                          itemBuilder: (context, index) {
+                            final data = playlistname[index];
+                            if (index % 2 == 0) {
+                              return PlayListListing(
+                                index: index,
+                                data: data,
+                              );
+                            }
+                            return OverflowBox(
+                              maxHeight: 250 + 70,
+                              child: Container(
+                                margin: EdgeInsets.only(top: 70),
+                                child: PlayListListing(
+                                  index: index,
+                                  data: data,
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : Column(
+                          children: [
+                            SizedBox(
+                              height: 300,
+                            ),
+                            Center(
+                              child: Text(
+                                "No playlist",
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         );
-                      }
-                      return OverflowBox(
-                        maxHeight: 250 + 70,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 70),
-                          child: PlayListListing(
-                            index: index,
-                            data: data,
-                          ),
-                        ),
-                      );
-                    },
-                  ):Column(
-                    children: [
-                      SizedBox(height: 300,),
-                      Center(child: Text("NO PLAY LIST",style: TextStyle(color: Colors.black54,fontSize: 18,fontWeight: FontWeight.w500),),),
-                    ],
-                  );
                 },
               )
             ],

@@ -1,17 +1,13 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naromusic/db/notifierlist/songNotifierList.dart';
 import 'package:naromusic/db/functions/db_functions.dart';
 import 'package:naromusic/db/models/playlistmodel.dart';
 import 'package:naromusic/db/models/songsmodel.dart';
-import 'package:naromusic/ui/bottom_navbarroot/bottomNavBar.dart';
 import 'package:naromusic/ui/bottom_navbarroot/drawer.dart';
 import 'package:naromusic/ui/playlist_page/playlist_songlisting.dart';
-import 'package:naromusic/ui/search_page/search_screen.dart';
 import 'package:naromusic/widgets/allwidget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
@@ -23,13 +19,9 @@ class homescreen extends StatefulWidget {
 final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
 
 class homescreenState extends State<homescreen> {
- 
   DateTime? savedDate;
 
-  List categories = ["Played", "Most Played", "Recently Played", "Best Songs"];
-
   //shared preferences name assigning
-  
 
   Future<void> _selectedTime() async {}
 
@@ -76,8 +68,9 @@ class homescreenState extends State<homescreen> {
                             //     fontSize: 20,
                             //     fontWeight: FontWeight.w500,
                             //     color: Colors.black54),
-                            style:GoogleFonts.bebasNeue(fontSize: 30,
-                               fontWeight: FontWeight.w500,
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.black54),
                           ),
                           Padding(
@@ -125,7 +118,11 @@ class homescreenState extends State<homescreen> {
                                         final data = playlistname[index];
                                         return InkWell(
                                           onTap: () {
-                                            Navigator.of(context).push(MaterialPageRoute(builder:(context) => PlayListSongListing(data: data),
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PlayListSongListing(
+                                                      data: data),
                                             ));
                                           },
                                           child: Neumorphic(
@@ -144,7 +141,8 @@ class homescreenState extends State<homescreen> {
                                                 child: Text(
                                               data.playlistname,
                                               style: TextStyle(
-                                                fontFamily: "FiraSansCondensed-Medium",
+                                                  fontFamily:
+                                                      "FiraSansCondensed-Medium",
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500),
                                             )),
@@ -153,10 +151,11 @@ class homescreenState extends State<homescreen> {
                                       },
                                     )
                                   : Center(
-                                      child: Text(
-                                        "No Play List",
-                                        style: GoogleFonts.beVietnamPro(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.grey.shade700)
-                                      ),
+                                      child: Text("No play list",
+                                          style: GoogleFonts.beVietnamPro(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18,
+                                              color: Colors.grey.shade700)),
                                     );
                             },
                           )),
@@ -170,10 +169,9 @@ class homescreenState extends State<homescreen> {
                         //     fontWeight: FontWeight.w500,
                         //     color: Colors.black54),
                         style: TextStyle(
-                          fontFamily: "FiraSansCondensed-Medium",
-                          fontSize: 20,
-                          color: Colors.black54
-                        ),
+                            fontFamily: "FiraSansCondensed-Medium",
+                            fontSize: 20,
+                            color: Colors.black54),
                       ),
                       ValueListenableBuilder(
                           valueListenable: allSongListNotifier,

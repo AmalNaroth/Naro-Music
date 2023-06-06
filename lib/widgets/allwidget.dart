@@ -108,7 +108,8 @@ class recentlyplayedandmostplayed extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),),
+        borderRadius: BorderRadius.circular(12),
+      ),
       leading: QueryArtworkWidget(
         id: data.id,
         type: ArtworkType.AUDIO,
@@ -155,7 +156,7 @@ class _ProductWidgetsState extends State<ProductWidgets> {
     mostplayedlistScreen()
   ];
 
-  List<String> containername = ["Favorite", "Recently Played", "Most Played"];
+  List<String> containername = ["Favourite", "Recently Played", "Most Played"];
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -225,7 +226,7 @@ class _ProductWidgetsState extends State<ProductWidgets> {
                         child: Text(
                           containername[index],
                           style: TextStyle(
-                            fontFamily: "FiraSansCondensed-Medium",
+                              fontFamily: "FiraSansCondensed-Medium",
                               color: Colors.black87,
                               //fontWeight: FontWeight.bold,
                               fontSize: 17),
@@ -353,62 +354,64 @@ class PlayListListing extends StatelessWidget {
 // );
 // //
 //                       },
-                       InkWell(
-                        onTap: () {
-                           // playlistdelete(data, context);
-                        },
-                         child: Neumorphic(
-                          style: NeumorphicStyle(
-                            shape: NeumorphicShape.flat,
-                            boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.circular(12),
-                            ),
-                            intensity: 1,
-                            color: Color.fromARGB(255, 217, 217, 217),
+                    InkWell(
+                      onTap: () {
+                        // playlistdelete(data, context);
+                      },
+                      child: Neumorphic(
+                        style: NeumorphicStyle(
+                          shape: NeumorphicShape.flat,
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(12),
                           ),
-                          // child: Padding(
-                          //   padding: EdgeInsets.all(10),
-                          //   child: Icon(Icons.delete),
-                          // ),
-                          child: PopupMenuButton(
-                                      color: Colors.white,
-                                      itemBuilder: (context) => [
-                                            PopupMenuItem(
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.of(context).pop();
-                                                    playlistdelete(data, context);
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                  Text('Delete Playlist'),
-                                                  Icon(Icons.delete)
-                                                    ],
-                                                    ),
-                                                )),
-                                            PopupMenuItem(
-                                                child: InkWell(
-                                                  onTap: () {
-                                                     Navigator.of(context).pop();
-                                                   final obj2= playlistnameupdate(context,index);
-                                                   obj2.createnewolayList(context);
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                  Text('Change name'),
-                                                  Icon(Icons.edit)
-                                                        ],
-                                                          ),
-                                                ))
-                                          ]),
-                                             ),
-                       ),
+                          intensity: 1,
+                          color: Color.fromARGB(255, 217, 217, 217),
+                        ),
+                        // child: Padding(
+                        //   padding: EdgeInsets.all(10),
+                        //   child: Icon(Icons.delete),
+                        // ),
+                        child: PopupMenuButton(
+                            color: Colors.white,
+                            itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                      child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      playlistdelete(data, context);
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Delete Playlist'),
+                                        Icon(Icons.delete)
+                                      ],
+                                    ),
+                                  )),
+                                  PopupMenuItem(
+                                      child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      final obj2 = playlistnameupdate(
+                                        context,
+                                        index,
+                                        data.playlistname,
+                                      );
+                                      obj2.createnewolayList(context);
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Change name'),
+                                        Icon(Icons.edit)
+                                      ],
+                                    ),
+                                  ))
+                                ]),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -459,7 +462,7 @@ class _NeuBoxState extends State<NeuBox> {
 // playlistcreationbootmsheet home page
 void callingBottomSheet(BuildContext context, songsmodel songdata) {
   addplaylistdbtovaluelistenable();
-  final obj=createnewplaylist(context);
+  final obj = createnewplaylist(context);
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
@@ -481,7 +484,7 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
           Text(
             'P L A Y L I S T',
             style: TextStyle(
-              fontFamily: "BebasNeue-Regular",
+                fontFamily: "BebasNeue-Regular",
                 fontSize: 30,
                 color: Colors.black45,
                 fontWeight: FontWeight.w500),
@@ -524,8 +527,8 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
                                     title: TextScroll(
                                       data.playlistname,
                                       style: TextStyle(
-                                        fontSize: 20,
-                                        overflow: TextOverflow.ellipsis,
+                                          fontSize: 20,
+                                          overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     tileColor: Color.fromARGB(0, 136, 136, 136)
@@ -540,7 +543,13 @@ void callingBottomSheet(BuildContext context, songsmodel songdata) {
                           },
                         )
                       : Center(
-                          child: Text("No Play List Add"),
+                          child: Text(
+                            "No playlist",
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54),
+                          ),
                         );
                 }),
           ),
@@ -572,10 +581,11 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Text(
-              'A L L S O N G L I S T',
-              style: TextStyle(fontSize: 30, color: Colors.black45,
-              fontFamily: "BebasNeue-Regular"
-              ),
+              'A L L S O N G S L I S T',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black45,
+                  fontFamily: "BebasNeue-Regular"),
             ),
           ),
           Expanded(
@@ -626,41 +636,57 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
 }
 
 //create new playlist popup
- class createnewplaylist{
+class createnewplaylist {
   createnewplaylist(this.context);
   BuildContext context;
-  final _formkey=GlobalKey<FormState>();
-    final _playlisttexcontroller = TextEditingController();
-   void createnewolayList(BuildContext context,){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Playlist cration",style: TextStyle(fontFamily: "BebasNeue-Regular",fontSize: 25),),
-      content: Form(
-        key: _formkey,
-        child: TextFormField(
-          decoration: InputDecoration(
-            label: Text("Enter your playlist name")
-          ),
-          controller: _playlisttexcontroller,
-          validator: (value) {
-             if (value == null || value.isEmpty) {
-                      return 'Please enter the playlist name';
-                    }
-          },
+  final _formkey = GlobalKey<FormState>();
+  final _playlisttexcontroller = TextEditingController();
+  void createnewolayList(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          "Playlist creation",
+          style: TextStyle(fontFamily: "BebasNeue-Regular", fontSize: 25),
         ),
-      ),
-      actions: [
-        TextButton(onPressed: (){
-           if(_formkey.currentState!.validate()){
+        content: Form(
+          key: _formkey,
+          child: TextFormField(
+            decoration:
+                InputDecoration(label: Text("Enter your playlist name")),
+            controller: _playlisttexcontroller,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter the playlist name';
+              }
+              return null;
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                if (_formkey.currentState!.validate()) {
                   _submitForm();
                   _playlisttexcontroller.clear();
-                 }
-        }, child: Text("Create",style: TextStyle(color: Colors.black),)),
-        TextButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
-      ],
-    ),);
+                }
+              },
+              child: Text(
+                "Create",
+                style: TextStyle(color: Colors.black),
+              )),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel", style: TextStyle(color: Colors.black)))
+        ],
+      ),
+    );
   }
+
   void _submitForm() {
     final textValue = _playlisttexcontroller.text;
     print('textcontroller = ${textValue}');
@@ -668,120 +694,134 @@ void callingBottomSheetsonglisting(BuildContext context, String listname) {
     addplaylisttodatabase(textValue, listarray, context);
     Navigator.pop(context);
   }
- }
-
-
+}
 
 // music slider in nowplaying screen
- class musicsliders extends StatefulWidget {
-   musicsliders({super.key});
+class musicsliders extends StatefulWidget {
+  musicsliders({super.key});
 
   @override
   State<musicsliders> createState() => _musicslidersState();
 }
 
 class _musicslidersState extends State<musicsliders> {
-  double slidervalue =0;
+  double slidervalue = 0;
 
-  double duration =0;
+  double duration = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-     audioPlayer.current.listen((event) {
+    audioPlayer.current.listen((event) {
       final totalduration = event!.audio.duration;
       duration = event.audio.duration.inSeconds.toDouble();
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    
-    return PlayerBuilder.currentPosition(player: audioPlayer, builder: (context, position) {
+    return PlayerBuilder.currentPosition(
+      player: audioPlayer,
+      builder: (context, position) {
+        slidervalue = position.inSeconds.toDouble();
 
-    slidervalue = position.inSeconds.toDouble();
+        return Column(
+          children: [
+            Slider(
+              value: slidervalue,
+              min: 0.0,
+              max: duration,
+              onChanged: (value) {
+                slidervalue = value;
+                audioPlayer.seek(Duration(seconds: slidervalue.toInt()));
+              },
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal:20.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
 
-    return Column(
-      children: [
-        Slider(value: slidervalue, min: 0.0,max: duration, onChanged: (value) {
-          
-            slidervalue = value;
-            audioPlayer.seek(Duration(seconds: slidervalue.toInt()));
-         
-        },),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal:20.0),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
+            //       PlayerBuilder.currentPosition(player: audioPlayer, builder: (context, position) {
+            //       final mm = (position.inMinutes %60).toString().padLeft(2,'0');
+            //       final ss = (position.inSeconds %60).toString().padLeft(2,'0');
+            //       return Text('${mm}:${ss}');
+            //     },),
+            //     PlayerBuilder.current(player: audioPlayer, builder: (context, playing) {
+            //       final totalduration = playing.audio.duration;
+            //       final mm = (totalduration.inMinutes %60).toString().padLeft(2,'0');
+            //       final ss = (totalduration.inSeconds %60).toString().padLeft(2,'0');
+            //       return Text('${mm}:${ss}');
+            //     },)
 
-        //       PlayerBuilder.currentPosition(player: audioPlayer, builder: (context, position) {
-        //       final mm = (position.inMinutes %60).toString().padLeft(2,'0');
-        //       final ss = (position.inSeconds %60).toString().padLeft(2,'0');
-        //       return Text('${mm}:${ss}');
-        //     },),
-        //     PlayerBuilder.current(player: audioPlayer, builder: (context, playing) {
-        //       final totalduration = playing.audio.duration;
-        //       final mm = (totalduration.inMinutes %60).toString().padLeft(2,'0');
-        //       final ss = (totalduration.inSeconds %60).toString().padLeft(2,'0');
-        //       return Text('${mm}:${ss}');
-        //     },)
-              
-
-           
-        //   ],),
-        // )
-      ],
+            //   ],),
+            // )
+          ],
+        );
+      },
     );
-  },);
   }
 }
 
-
 //playlist nameupdating
-class playlistnameupdate{
-  playlistnameupdate(this.context,this.index);
+class playlistnameupdate {
+  playlistnameupdate(this.context, this.index, this.playlistname);
   BuildContext context;
   int index;
+  String playlistname;
 
-  final _formkey=GlobalKey<FormState>();
-    final _playlisttexcontroller = TextEditingController();
-   void createnewolayList(BuildContext context,){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Playlist cration",style: TextStyle(fontFamily: "BebasNeue-Regular",fontSize: 25),),
-      content: Form(
-        key: _formkey,
-        child: TextFormField(
-          decoration: InputDecoration(
-            label: Text("Enter your new playlist name")
-          ),
-          controller: _playlisttexcontroller,
-          validator: (value) {
-             if (value == null || value.isEmpty) {
-                      return 'Please enter the playlist name';
-                    }
-          },
+  final _formkey = GlobalKey<FormState>();
+  final _playlisttexcontroller = TextEditingController();
+  void createnewolayList(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          "Playlist creation",
+          style: TextStyle(fontFamily: "BebasNeue-Regular", fontSize: 25),
         ),
-      ),
-      actions: [
-        TextButton(onPressed: (){
-           if(_formkey.currentState!.validate()){
+        content: Form(
+          key: _formkey,
+          child: TextFormField(
+            decoration:
+                InputDecoration(label: Text("Enter your new playlist name")),
+            controller: _playlisttexcontroller,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter the playlist name';
+              }
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                if (_formkey.currentState!.validate()) {
                   _submitForm();
-                 }
-        }, child: Text("Create",style: TextStyle(color: Colors.black),)),
-        TextButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
-      ],
-    ),);
+                }
+              },
+              child: Text(
+                "Create",
+                style: TextStyle(color: Colors.black),
+              )),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel", style: TextStyle(color: Colors.black)))
+        ],
+      ),
+    );
   }
+
   void _submitForm() {
     final textValue = _playlisttexcontroller.text;
     print('textcontroller = ${textValue}');
     List<songsmodel> listarray = [];
-    playlistrename(textValue, listarray, context, index);
+    playlistrename(textValue, context, index, playlistname);
     Navigator.pop(context);
   }
- }
+}

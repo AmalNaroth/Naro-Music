@@ -117,7 +117,7 @@ class _PlayListSongListingState extends State<PlayListSongListing> {
       ),
       child: AlertDialog(
       title: Text('Alert'),
-      content: Text('Are you sure you want to delete'),
+      content: Text('Are you sure you want to delete?'),
       actions: <Widget>[
         ElevatedButton(
           child: Text('Cancel'),
